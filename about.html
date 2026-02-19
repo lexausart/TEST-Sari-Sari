@@ -1,21 +1,20 @@
-<!-- about.html -->
+<!-- index.html -->
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tangazon — About</title>
+    <title>Tang’s Sari-Sari Store</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
 </head>
 
 <body>
-    <!-- SAME HEADER -->
     <header class="topbar" role="banner">
         <div class="topbar__row">
-            <a class="brand" href="index.html" aria-label="Tangazon home">
-                <span class="brand__logo">tangazon</span>
+            <a class="brand" href="#" aria-label="Tangazon home">
+                <span class="brand__logo">sari-sari store</span>
                 <span class="brand__tag">.ph? maybe</span>
             </a>
 
@@ -25,10 +24,10 @@
             </a>
 
             <button class="pill location" type="button" aria-label="Deliver to">
-                Deliver to <strong>Bisaya Island</strong>
+                <strong>Coeurl</strong> Goblet Ward 22 Plot 25
             </button>
 
-            <form class="search" role="search" aria-label="Product search" action="index.html">
+            <form class="search" role="search" aria-label="Product search">
                 <label class="sr-only" for="q">Search Tangazon</label>
                 <select class="search__select" aria-label="Department">
                     <option>All</option>
@@ -43,65 +42,32 @@
             </form>
 
             <nav class="account" aria-label="Account links">
-                <a class="account__item" href="about.html">
-                    <span class="small">What is this</span>
-                    <strong>About</strong>
+                <a class="account__item" href="#">
+                    <span class="small">Hello, traveler</span>
+                    <strong>Join our Discord</strong>
                 </a>
-                <a class="account__item" href="staff.html">
-                    <span class="small">Meet the crew</span>
-                    <strong>Staff</strong>
+                <a class="account__item" href="#">
+                    <span class="small">Hours</span>
+                    <strong>9PM - 11PM EST</strong>
                 </a>
             </nav>
         </div>
 
         <div class="topbar__strip" role="navigation" aria-label="Categories">
-            <!-- Drawer hamburger -->
-            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false"
-                aria-controls="drawerMenu">
-                <span class="hamburger__icon" aria-hidden="true">
-                    <span></span><span></span><span></span>
-                </span>
-                <span class="hamburger__text">All</span>
-            </button>
 
-            <a class="stripLink" href="index.html">Shop</a>
-            <a class="stripLink" href="about.html">About</a>
-            <a class="stripLink" href="staff.html">Staff</a>
-            <a class="stripLink" href="#">Help (maybe)</a>
+            <!-- Optional quick links that stay visible -->
+            <a class="stripLink" href="/about.html">About</a>
+            <a class="stripLink" href="/staff.html">Staff</a>
+            <a class="stripLink" href="/hooks.html">Hooks (maybe)</a>
         </div>
     </header>
-
-    <!-- SAME DRAWER -->
-    <div class="drawer" data-drawer aria-hidden="true">
-        <div class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="Close menu overlay"></div>
-
-        <aside id="drawerMenu" class="drawer__panel" role="dialog" aria-modal="true" aria-label="All categories">
-            <div class="drawer__head">
-                <strong>All Categories</strong>
-                <button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">✕</button>
-            </div>
-
-            <nav class="drawer__nav" aria-label="Category links">
-                <a href="index.html#">Today’s Deals-ish</a>
-                <a href="index.html#">Sari Bundles</a>
-                <a href="index.html#">Aether-Safe</a>
-                <a href="index.html#">Euclid’s “Engineering Picks”</a>
-                <a href="index.html#">Tito Whiskey’s Questionable Wisdom</a>
-                <a href="index.html#">Gift Cards (IOUs)</a>
-            </nav>
-
-            <div class="drawer__footer">
-                <small>Prime-ish shipping not available in areas with active sidequests.</small>
-            </div>
-        </aside>
-    </div>
 
     <!-- PAGE CONTENT -->
     <section class="hero" aria-label="About banner">
         <div class="hero__inner">
-            <h1>About Tangazon</h1>
+            <h1>About the Sari-Sari Store</h1>
             <p>
-                Tangazon is Tang’s very legitimate, absolutely charming, <em>not-at-all suspicious</em>
+                Sari-Sari Store is Tang’s very legitimate, absolutely charming, <em>not-at-all suspicious</em>
                 sari-sari storefront—now with delivery and a little bit of plot.
             </p>
             <div class="hero__cta">
@@ -128,7 +94,7 @@
                     <h2>What is a sari-sari store?</h2>
                     <p>
                         A sari-sari store is a tiny neighborhood shop: snacks, staples, and small comforts
-                        that keep daily life moving. Tangazon keeps that feeling—just scaled up for travelers
+                        that keep daily life moving. This store keeps that feeling—just scaled up for travelers
                         who keep getting “accidentally” recruited into sidequests.
                     </p>
                     <ul>
@@ -141,11 +107,11 @@
                 <article class="aboutCard">
                     <h2>How we ship</h2>
                     <p>
-                        We run on <strong>Prime-ish</strong> delivery: fast when the roads are clear,
-                        slower when the twins “help,” and mysteriously instant when Sunny feels like being dramatic.
+                        We run on <strong>Primal</strong> delivery: fast when the roads are clear,
+                        slower when the Bryn “helps,” and mysteriously instant when Sunny feels like being dramatic.
                     </p>
                     <div class="aboutCallout">
-                        <strong>Prime-ish guarantee:</strong>
+                        <strong>Primal guarantee:</strong>
                         arrives between “soon” and “after the next cutscene.”
                     </div>
                 </article>
@@ -173,7 +139,7 @@
                         <li><strong>Ginhawa:</strong> relief, ease, and warmth in small things.</li>
                         <li><strong>Community:</strong> everyone gets fed (even rivals).</li>
                         <li><strong>Consent:</strong> we do not bless you without permission. (Tang… usually.)</li>
-                        <li><strong>Craft:</strong> if Euclid builds it, it’s over-engineered and beautiful.</li>
+                        <li><strong>Craft:</strong> if R'tehz builds it, it’s over-engineered and beautiful.</li>
                     </ul>
                 </article>
 
@@ -197,7 +163,7 @@
                     <h2>Contact</h2>
                     <p>
                         For orders, questions, and spiritual misunderstandings, visit the shop or send a message through
-                        the nearest wind current. If that fails, try leaving a note by the dalakit tree.
+                        the nearest wind current. If that fails, try leaving a note in the Message Book.
                     </p>
                     <div class="aboutButtons">
                         <a class="btn btn--primary" href="index.html">Browse Products</a>
@@ -208,7 +174,7 @@
 
             <!-- SAME FOOTER -->
             <footer class="footer">
-                <p>© Tangazon. Powered by vibes, duct tape, and sidequests.</p>
+                <p>© Sari-Sari Store. Powered by vibes, duct tape, and sidequests.</p>
             </footer>
         </section>
     </main>
