@@ -1,0 +1,258 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tangazon — Tang’s Sari-Sari Store</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <div class="topbar__row">
+      <a class="brand" href="#">
+        <span class="brand__logo">tangazon</span>
+        <span class="brand__tag">.ph? maybe</span>
+      </a>
+
+      <button class="pill location" type="button" aria-label="Deliver to">
+        Deliver to <strong>Bisaya Island</strong>
+      </button>
+
+      <form class="search" role="search" aria-label="Product search">
+        <label class="sr-only" for="q">Search Tangazon</label>
+        <select class="search__select" aria-label="Department">
+          <option>All</option>
+          <option>Snacks</option>
+          <option>Drinks</option>
+          <option>Household</option>
+          <option>Gacha & Trinkets</option>
+          <option>“Definitely Not Cursed”</option>
+        </select>
+        <input id="q" class="search__input" placeholder="Search: chicharron, calamansi, aether batteries…" />
+        <button class="search__btn" type="submit" aria-label="Search">🔎</button>
+      </form>
+
+      <nav class="account" aria-label="Account links">
+        <a class="account__item" href="#">
+          <span class="small">Hello, traveler</span>
+          <strong>Account & Lists ▾</strong>
+        </a>
+        <a class="account__item" href="#">
+          <span class="small">Returns</span>
+          <strong>& Orders</strong>
+        </a>
+        <a class="cart" href="#" aria-label="Cart">
+          <span class="cart__count" aria-hidden="true">2</span>
+          🧺 <strong>Cart</strong>
+        </a>
+      </nav>
+    </div>
+
+    <div class="topbar__strip" role="navigation" aria-label="Categories">
+      <button class="hamburger" type="button" aria-label="All categories">☰ All</button>
+      <a href="#">Today’s Deals-ish</a>
+      <a href="#">Sari Bundles</a>
+      <a href="#">Aether-Safe</a>
+      <a href="#">Euclid’s “Engineering Picks”</a>
+      <a href="#">Tito Whiskey’s Questionable Wisdom</a>
+      <a href="#">Gift Cards (IOUs)</a>
+    </div>
+  </header>
+
+  <section class="hero" aria-label="Promotional banner">
+    <div class="hero__inner">
+      <h1>Welcome to Tangazon</h1>
+      <p>
+        The convenience store that delivers <em>convenience</em>, minor chaos, and occasionally
+        a polite spirit offering.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#">Shop “Not Suspicious” Deals</a>
+        <a class="btn btn--ghost" href="#">Track an Order (good luck)</a>
+      </div>
+      <p class="hero__fineprint">*Prime-ish shipping: arrives between “soon” and “after the next sidequest.”</p>
+    </div>
+  </section>
+
+  <main class="layout" role="main">
+    <!-- Desktop sidebar filters -->
+    <aside class="filters filters--desktop" aria-label="Filters">
+      <h2 class="filters__title">Refine by</h2>
+
+      <section class="filter">
+        <h3 class="filter__heading">Department</h3>
+        <label class="check"><input type="checkbox" /> Snacks</label>
+        <label class="check"><input type="checkbox" /> Drinks</label>
+        <label class="check"><input type="checkbox" /> Household</label>
+        <label class="check"><input type="checkbox" /> Charms & Trinkets</label>
+        <label class="check"><input type="checkbox" /> “Not Cursed” Section</label>
+      </section>
+
+      <section class="filter">
+        <h3 class="filter__heading">Delivery</h3>
+        <label class="check"><input type="checkbox" /> Prime-ish eligible</label>
+        <label class="check"><input type="checkbox" /> Same-day (if Euclid runs)</label>
+      </section>
+
+      <section class="filter">
+        <h3 class="filter__heading">Rating</h3>
+        <label class="radio"><input type="radio" name="ratingDesktop" /> 4★ & up</label>
+        <label class="radio"><input type="radio" name="ratingDesktop" /> 3★ & up</label>
+        <label class="radio"><input type="radio" name="ratingDesktop" /> “It works”</label>
+      </section>
+
+      <section class="filter">
+        <h3 class="filter__heading">Price</h3>
+        <div class="price">
+          <input class="price__input" placeholder="₱ min" inputmode="numeric" />
+          <span>—</span>
+          <input class="price__input" placeholder="₱ max" inputmode="numeric" />
+        </div>
+        <button class="btn btn--small" type="button">Apply</button>
+      </section>
+
+      <section class="filter">
+        <h3 class="filter__heading">Special</h3>
+        <label class="check"><input type="checkbox" /> Blessing included</label>
+        <label class="check"><input type="checkbox" /> Euclid-tested</label>
+        <label class="check"><input type="checkbox" /> Tito-approved (danger)</label>
+      </section>
+    </aside>
+
+    <section class="results" aria-label="Results">
+      <!-- Mobile filters drawer -->
+      <details class="filtersDrawer" aria-label="Filters drawer">
+        <summary class="btn btn--ghost">🔧 Filters</summary>
+        <div class="filtersDrawer__panel">
+          <div class="filtersDrawer__hint">Tip: Choose “Prime-ish” for maximum chaos.</div>
+
+          <!-- Same filter content (mobile) -->
+          <div class="filtersDrawer__grid">
+            <section class="filter">
+              <h3 class="filter__heading">Department</h3>
+              <label class="check"><input type="checkbox" /> Snacks</label>
+              <label class="check"><input type="checkbox" /> Drinks</label>
+              <label class="check"><input type="checkbox" /> Household</label>
+              <label class="check"><input type="checkbox" /> Charms & Trinkets</label>
+              <label class="check"><input type="checkbox" /> “Not Cursed” Section</label>
+            </section>
+
+            <section class="filter">
+              <h3 class="filter__heading">Delivery</h3>
+              <label class="check"><input type="checkbox" /> Prime-ish eligible</label>
+              <label class="check"><input type="checkbox" /> Same-day (if Euclid runs)</label>
+            </section>
+
+            <section class="filter">
+              <h3 class="filter__heading">Rating</h3>
+              <label class="radio"><input type="radio" name="ratingMobile" /> 4★ & up</label>
+              <label class="radio"><input type="radio" name="ratingMobile" /> 3★ & up</label>
+              <label class="radio"><input type="radio" name="ratingMobile" /> “It works”</label>
+            </section>
+
+            <section class="filter">
+              <h3 class="filter__heading">Price</h3>
+              <div class="price">
+                <input class="price__input" placeholder="₱ min" inputmode="numeric" />
+                <span>—</span>
+                <input class="price__input" placeholder="₱ max" inputmode="numeric" />
+              </div>
+              <button class="btn btn--small" type="button">Apply</button>
+            </section>
+
+            <section class="filter">
+              <h3 class="filter__heading">Special</h3>
+              <label class="check"><input type="checkbox" /> Blessing included</label>
+              <label class="check"><input type="checkbox" /> Euclid-tested</label>
+              <label class="check"><input type="checkbox" /> Tito-approved (danger)</label>
+            </section>
+          </div>
+        </div>
+      </details>
+
+      <div class="results__bar">
+        <div>
+          <strong>1–12</strong> of <strong>9,999+</strong> results for <em>“snacks that cause plot”</em>
+        </div>
+        <div class="sort">
+          <label class="sr-only" for="sort">Sort</label>
+          <select id="sort">
+            <option>Sort by: Featured</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Avg. Customer Chaos</option>
+            <option>Newest Arrivals</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid" aria-label="Product grid">
+        <article class="card">
+          <div class="card__img" aria-hidden="true">🥟</div>
+          <h3 class="card__title">Chicharron (Sacred Crunch)</h3>
+          <p class="card__meta">Ships from: Tang’s Counter • Condition: dangerously crispy</p>
+          <div class="card__rating" aria-label="Rating">★★★★☆ <span>(2,401)</span></div>
+          <div class="card__price"><span class="currency">₱</span>79 <span class="card__prime">Prime-ish</span></div>
+          <button class="btn btn--add" type="button">Add to Cart</button>
+          <p class="card__note">Warning: may attract friendly spirits.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__img" aria-hidden="true">🍋</div>
+          <h3 class="card__title">Calamansi Concentrate</h3>
+          <p class="card__meta">Ships from: Sunny’s stash • “for health”</p>
+          <div class="card__rating" aria-label="Rating">★★★★★ <span>(803)</span></div>
+          <div class="card__price"><span class="currency">₱</span>55</div>
+          <button class="btn btn--add" type="button">Add to Cart</button>
+          <p class="card__note">Sour enough to reset your life choices.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__img" aria-hidden="true">🧃</div>
+          <h3 class="card__title">Tito Whiskey’s “Juice”</h3>
+          <p class="card__meta">Ships from: Definitely not Tito • trust?</p>
+          <div class="card__rating" aria-label="Rating">★★★☆☆ <span>(666)</span></div>
+          <div class="card__price"><span class="currency">₱</span>120</div>
+          <button class="btn btn--add" type="button">Add to Cart</button>
+          <p class="card__note">May contain wisdom. May contain lies.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__img" aria-hidden="true">🔋</div>
+          <h3 class="card__title">Aether Batteries (Euclid Edition)</h3>
+          <p class="card__meta">Ships from: Workshop • “I calibrated them.”</p>
+          <div class="card__rating" aria-label="Rating">★★★★☆ <span>(1,112)</span></div>
+          <div class="card__price"><span class="currency">₱</span>349 <span class="card__prime">Prime-ish</span></div>
+          <button class="btn btn--add" type="button">Add to Cart</button>
+          <p class="card__note">If it hums, that’s normal. Probably.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__img" aria-hidden="true">🧼</div>
+          <h3 class="card__title">Bar Soap (Anti-Aswang Scent)</h3>
+          <p class="card__meta">Ships from: Dayang Kalinga • stolen fair & square</p>
+          <div class="card__rating" aria-label="Rating">★★★★☆ <span>(512)</span></div>
+          <div class="card__price"><span class="currency">₱</span>38</div>
+          <button class="btn btn--add" type="button">Add to Cart</button>
+          <p class="card__note">Smells like safety and mild intimidation.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__img" aria-hidden="true">🧸</div>
+          <h3 class="card__title">Twin Gremlin Plush (Set of 2)</h3>
+          <p class="card__meta">Ships from: Iara & Caio • “we packed it!”</p>
+          <div class="card__rating" aria-label="Rating">★★★★★ <span>(9,001)</span></div>
+          <div class="card__price"><span class="currency">₱</span>499</div>
+          <button class="btn btn--add" type="button">Add to Cart</button>
+          <p class="card__note">Some assembly required (emotional).</p>
+        </article>
+      </div>
+
+      <footer class="footer">
+        <p>© Tangazon. Powered by vibes, duct tape, and sidequests.</p>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
