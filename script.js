@@ -20,6 +20,51 @@
     const minPriceEl = document.getElementById("minPrice");
     const maxPriceEl = document.getElementById("maxPrice");
 
+    //Hamburger please
+    // --- Hamburger menu (categories) ---
+    (() => {
+        const nav = document.querySelector("[data-nav]");
+        if (!nav) return;
+
+        const btn = nav.querySelector(".hamburger");
+        const panel = nav.querySelector(".navMenu__panel");
+
+        const open = () => {
+            nav.classList.add("is-open");
+            btn.setAttribute("aria-expanded", "true");
+            btn.setAttribute("aria-label", "Close menu");
+            // Focus first link for accessibility
+            const first = panel.querySelector("a");
+            first && first.focus();
+        };
+
+        const close = () => {
+            nav.classList.remove("is-open");
+            btn.setAttribute("aria-expanded", "false");
+            btn.setAttribute("aria-label", "Open menu");
+        };
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            nav.classList.contains("is-open") ? close() : open();
+        });
+
+        // Close on outside click/tap
+        document.addEventListener("click", (e) => {
+            if (!nav.classList.contains("is-open")) return;
+            if (!nav.contains(e.target)) close();
+        });
+
+        // Close on Escape
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && nav.classList.contains("is-open")) {
+                close();
+                btn.focus();
+            }
+        });
+    })();
+
+
     // Toast styles (injected)
     const style = document.createElement("style");
     style.textContent = `

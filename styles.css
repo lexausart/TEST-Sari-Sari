@@ -57,6 +57,102 @@ a:hover {
 }
 
 /* ---------- Header (mobile-first stacked) ---------- */
+/* Real hamburger menu (dropdown) */
+.navMenu {
+  position: relative;
+}
+
+.hamburger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: rgba(255, 255, 255, .10);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, .14);
+}
+
+.hamburger__icon {
+  width: 18px;
+  height: 14px;
+  display: grid;
+  align-content: space-between;
+}
+
+.hamburger__icon span {
+  display: block;
+  height: 2px;
+  background: #fff;
+  border-radius: 999px;
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+/* “X” animation when open */
+.navMenu.is-open .hamburger__icon span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.navMenu.is-open .hamburger__icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.navMenu.is-open .hamburger__icon span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.hamburger__text {
+  font-weight: 800;
+}
+
+/* Dropdown panel */
+.navMenu__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 240px;
+  max-width: min(360px, calc(100vw - 24px));
+  background: #0b1220;
+  /* slightly darker than nav2 */
+  border: 1px solid rgba(255, 255, 255, .10);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+  padding: 8px;
+  display: none;
+  z-index: 200;
+}
+
+.navMenu.is-open .navMenu__panel {
+  display: block;
+}
+
+.navMenu__panel a {
+  display: block;
+  padding: 10px 10px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, .95);
+}
+
+.navMenu__panel a:hover {
+  background: rgba(255, 255, 255, .10);
+  text-decoration: none;
+}
+
+/* Optional: on very small screens, let it open full-width */
+@media (max-width: 420px) {
+  .navMenu__panel {
+    left: 0;
+    right: 0;
+    min-width: auto;
+  }
+}
+
+
 .topbar {
   background: var(--nav);
   color: #fff;

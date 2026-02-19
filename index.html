@@ -53,7 +53,24 @@
     </div>
 
     <div class="topbar__strip" role="navigation" aria-label="Categories">
-      <button class="hamburger" type="button" aria-label="All categories">☰ All</button>
+      <div class="navMenu" data-nav>
+        <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="catMenu">
+          <span class="hamburger__icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="hamburger__text">All</span>
+        </button>
+
+        <div id="catMenu" class="navMenu__panel" role="menu" aria-label="All categories">
+          <a role="menuitem" href="#">Today’s Deals-ish</a>
+          <a role="menuitem" href="#">Sari Bundles</a>
+          <a role="menuitem" href="#">Aether-Safe</a>
+          <a role="menuitem" href="#">Euclid’s “Engineering Picks”</a>
+          <a role="menuitem" href="#">Tito Whiskey’s Questionable Wisdom</a>
+          <a role="menuitem" href="#">Gift Cards (IOUs)</a>
+        </div>
+      </div>
+
       <a href="#">Today’s Deals-ish</a>
       <a href="#">Sari Bundles</a>
       <a href="#">Aether-Safe</a>
