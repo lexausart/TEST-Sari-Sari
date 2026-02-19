@@ -1,3 +1,48 @@
+// script.js
+
+// --- Hamburger menu (categories) ---
+(() => {
+    const nav = document.querySelector("[data-nav]");
+    if (!nav) return;
+
+    const btn = nav.querySelector(".hamburger");
+    const panel = nav.querySelector(".navMenu__panel");
+    if (!btn || !panel) return;
+
+    const open = () => {
+        nav.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+        btn.setAttribute("aria-label", "Close menu");
+        const first = panel.querySelector("a");
+        first && first.focus();
+    };
+
+    const close = () => {
+        nav.classList.remove("is-open");
+        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-label", "Open menu");
+    };
+
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        nav.classList.contains("is-open") ? close() : open();
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!nav.classList.contains("is-open")) return;
+        if (!nav.contains(e.target)) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && nav.classList.contains("is-open")) {
+            close();
+            btn.focus();
+        }
+    });
+})();
+
+
+// --- Store interactions (search, sort, filters, cart toast) ---
 (() => {
     const grid = document.querySelector(".grid");
     if (!grid) return;
@@ -20,52 +65,7 @@
     const minPriceEl = document.getElementById("minPrice");
     const maxPriceEl = document.getElementById("maxPrice");
 
-    //Hamburger please
-    // --- Hamburger menu (categories) ---
-    (() => {
-        const nav = document.querySelector("[data-nav]");
-        if (!nav) return;
-
-        const btn = nav.querySelector(".hamburger");
-        const panel = nav.querySelector(".navMenu__panel");
-
-        const open = () => {
-            nav.classList.add("is-open");
-            btn.setAttribute("aria-expanded", "true");
-            btn.setAttribute("aria-label", "Close menu");
-            // Focus first link for accessibility
-            const first = panel.querySelector("a");
-            first && first.focus();
-        };
-
-        const close = () => {
-            nav.classList.remove("is-open");
-            btn.setAttribute("aria-expanded", "false");
-            btn.setAttribute("aria-label", "Open menu");
-        };
-
-        btn.addEventListener("click", (e) => {
-            e.preventDefault();
-            nav.classList.contains("is-open") ? close() : open();
-        });
-
-        // Close on outside click/tap
-        document.addEventListener("click", (e) => {
-            if (!nav.classList.contains("is-open")) return;
-            if (!nav.contains(e.target)) close();
-        });
-
-        // Close on Escape
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && nav.classList.contains("is-open")) {
-                close();
-                btn.focus();
-            }
-        });
-    })();
-
-
-    // Toast styles (injected)
+    // Toast styles
     const style = document.createElement("style");
     style.textContent = `
       .toast{
@@ -106,7 +106,7 @@
         }, 1400);
     }
 
-    // ---------- Cart ----------
+    // Cart
     let cartCount = Number(cartBadge?.textContent || 0);
     function setCartCount(n) {
         cartCount = n;
@@ -123,7 +123,7 @@
         toast(`Added: ${title}`);
     });
 
-    // ---------- Sorting ----------
+    // Sorting helpers
     const numAttr = (card, name, fallback = 0) => {
         const n = Number(card.getAttribute(name));
         return Number.isFinite(n) ? n : fallback;
@@ -165,12 +165,12 @@
 
     if (sortSelect) sortSelect.addEventListener("change", () => applySort(sortSelect.value));
 
-    // ---------- Filters + Search ----------
+    // Filters + Search state
     const state = {
         q: "",
-        deptDropdown: "all",      // from top search select
-        deptChecks: new Set(),    // from checkbox filters
-        flags: new Set(),         // from checkbox filters
+        deptDropdown: "all",
+        deptChecks: new Set(),
+        flags: new Set(),
         ratingMin: 0,
         minPrice: null,
         maxPrice: null,
@@ -213,14 +213,9 @@
             const rating = numAttr(card, "data-rating", 0);
 
             const matchesText = !q || cardText(card).includes(q);
-
-            // department dropdown
             const matchesDeptDrop = deptDrop === "all" || dept === deptDrop;
-
-            // department checkboxes (OR within selected depts; if none selected, ignore)
             const matchesDeptChecks = deptChecks.size === 0 || deptChecks.has(dept);
 
-            // flags (AND: if you select prime+euclid it must have both)
             let matchesFlags = true;
             for (const f of flags) {
                 if (!cardFlags.has(f)) { matchesFlags = false; break; }
@@ -230,7 +225,15 @@
             const matchesMin = minP == null || price >= minP;
             const matchesMax = maxP == null || price <= maxP;
 
-            const show = matchesText && matchesDeptDrop && matchesDeptChecks && matchesFlags && matchesRating && matchesMin && matchesMax;
+            const show =
+                matchesText &&
+                matchesDeptDrop &&
+                matchesDeptChecks &&
+                matchesFlags &&
+                matchesRating &&
+                matchesMin &&
+                matchesMax;
+
             card.classList.toggle("is-hidden", !show);
             if (show) shown++;
         }
@@ -272,7 +275,7 @@
         });
     }
 
-    // Filter controls in aside
+    // Filter inputs (checkboxes + radios)
     document.addEventListener("change", (e) => {
         const el = e.target;
         if (!(el instanceof HTMLInputElement)) return;
@@ -324,8 +327,10 @@
             state.minPrice = null;
             state.maxPrice = null;
 
-            // reset UI inputs
-            document.querySelectorAll('input[data-filter="dept"], input[data-filter="flag"]').forEach((i) => (i.checked = false));
+            document
+                .querySelectorAll('input[data-filter="dept"], input[data-filter="flag"]')
+                .forEach((i) => (i.checked = false));
+
             const anyRadio = document.querySelector('input[data-filter="ratingMin"][value="0"]');
             if (anyRadio) anyRadio.checked = true;
 
@@ -337,7 +342,7 @@
         });
     }
 
-    // Initial state
+    // Initial
     state.q = norm(searchInput?.value || "");
     state.deptDropdown = deptKeyFromDropdown(deptSelect?.value || "All");
     applyAllFilters();

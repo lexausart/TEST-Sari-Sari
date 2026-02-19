@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!doctype html>
 <html lang="en">
 
@@ -53,6 +54,7 @@
     </div>
 
     <div class="topbar__strip" role="navigation" aria-label="Categories">
+      <!-- Real hamburger menu -->
       <div class="navMenu" data-nav>
         <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="catMenu">
           <span class="hamburger__icon" aria-hidden="true">
@@ -70,6 +72,11 @@
           <a role="menuitem" href="#">Gift Cards (IOUs)</a>
         </div>
       </div>
+
+      <!-- Optional quick links that stay visible -->
+      <a class="stripLink" href="#">Prime-ish</a>
+      <a class="stripLink" href="#">New Arrivals</a>
+      <a class="stripLink" href="#">Help (maybe)</a>
     </div>
   </header>
 
@@ -89,7 +96,7 @@
   </section>
 
   <main class="layout" role="main">
-    <!-- Mobile: this is the filters drawer. Desktop: it becomes the sidebar. -->
+    <!-- Mobile: drawer. Desktop: sidebar. -->
     <details class="filtersShell" aria-label="Filters">
       <summary class="filtersShell__summary btn btn--ghost">🔧 Filters</summary>
 
@@ -239,6 +246,5 @@
     </section>
   </main>
 </body>
-<script src="script.js" defer></script>
 
 </html>
