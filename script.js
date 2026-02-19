@@ -347,3 +347,40 @@
     state.deptDropdown = deptKeyFromDropdown(deptSelect?.value || "All");
     applyAllFilters();
 })();
+
+// --- Random RP Hook Generator ---
+(() => {
+    const btn = document.getElementById("randomHookBtn");
+    const box = document.getElementById("randomHookBox");
+    const text = document.getElementById("randomHookText");
+    if (!btn || !box || !text) return;
+
+    const hooks = [
+        "You receive the wrong order. It contains something humming softly.",
+        "Tang insists you pay with a story instead of gil.",
+        "A trinket glows when you walk past the counter.",
+        "Euclid needs help testing something that absolutely will not explode.",
+        "One of the twins claims you promised them candy.",
+        "Sunny hands you a drink and says, 'This one chooses people.'",
+        "Tito Whiskey is already mid-sentence when you walk in.",
+        "A note pinned to the wall has your name on it.",
+        "The shop lights flicker when you enter.",
+        "You overhear your own name in a whispered argument.",
+        "A delivery crate arrives addressed to you.",
+        "Tang greets you like she’s been expecting you.",
+        "Someone storms out of the shop just as you arrive.",
+        "The twins are running a 'totally legal' side business.",
+        "A shelf collapses at the exact moment you look at it."
+    ];
+
+    btn.addEventListener("click", () => {
+        const random = hooks[Math.floor(Math.random() * hooks.length)];
+        text.textContent = random;
+        box.hidden = false;
+
+        // Re-trigger animation
+        box.style.animation = "none";
+        box.offsetHeight; // force reflow
+        box.style.animation = "";
+    });
+})();
