@@ -733,8 +733,6 @@ body.drawer-open {
 }
 
 .staffCard__avatar {
-  /* width: 56px;
-  height: 56px; */
   border-radius: 14px;
   display: flex;
   align-items: center;
