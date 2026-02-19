@@ -733,8 +733,8 @@ body.drawer-open {
 }
 
 .staffCard__avatar {
-  width: 56px;
-  height: 56px;
+  /* width: 56px;
+  height: 56px; */
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -742,11 +742,6 @@ body.drawer-open {
   font-size: 28px;
   background: linear-gradient(180deg, #f3f4f6 0%, #fff 100%);
   flex: 0 0 auto;
-}
-
-.staffCard__gif {
-  width: 100px;
-  height: 100px;
 }
 
 .staffCard__name {
