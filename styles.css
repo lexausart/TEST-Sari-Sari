@@ -407,10 +407,6 @@ a:hover {
   list-style: none;
 }
 
-.filtersShell summary::-webkit-details-marker {
-  display: none;
-}
-
 .filters {
   margin-top: 10px;
   background: var(--panel);
@@ -843,9 +839,6 @@ a:hover {
   }*/
 
   /* Filters become sticky sidebar; summary button hidden */
-  .filtersShell__summary {
-    display: none;
-  }
 
   .filtersShell[open] .filters {
     margin-top: 0;
