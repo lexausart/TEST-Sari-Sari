@@ -986,9 +986,9 @@ body.drawer-open {
   }
 
   /* Desktop layout gets sidebar */
-  .layout {
+  /*  .layout {
     grid-template-columns: 280px 1fr;
-  }
+  }*/
 
   /* Filters become sticky sidebar; summary button hidden */
   .filtersShell__summary {
