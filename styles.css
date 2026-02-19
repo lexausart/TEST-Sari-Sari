@@ -1,4 +1,10 @@
-/* styles.css */
+/* styles.css
+   Tangazon — single consolidated stylesheet (shop + drawer + staff + about + hooks + random hook)
+*/
+
+/* =========================
+   Theme + Base
+========================= */
 :root {
   --bg: #e9edf2;
   --panel: #fff;
@@ -57,7 +63,9 @@ a:hover {
   border: 0;
 }
 
-/* Header (mobile-first stacked) */
+/* =========================
+   Header (mobile-first)
+========================= */
 .topbar {
   background: var(--nav);
   color: #fff;
@@ -217,6 +225,7 @@ a:hover {
   font-size: 13px;
 }
 
+/* Strip / categories */
 .topbar__strip {
   background: var(--nav2);
   border-top: 1px solid rgba(255, 255, 255, .08);
@@ -244,11 +253,7 @@ a:hover {
   text-decoration: none;
 }
 
-/* Real hamburger menu (dropdown) */
-.navMenu {
-  position: relative;
-}
-
+/* Hamburger button (for slide-out drawer) */
 .hamburger {
   display: inline-flex;
   align-items: center;
@@ -280,63 +285,119 @@ a:hover {
   transition: transform .18s ease, opacity .18s ease;
 }
 
-/* “X” animation when open */
-.navMenu.is-open .hamburger__icon span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.navMenu.is-open .hamburger__icon span:nth-child(2) {
-  opacity: 0;
-}
-
-.navMenu.is-open .hamburger__icon span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
 .hamburger__text {
   font-weight: 800;
 }
 
-.navMenu__panel {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  min-width: 240px;
-  max-width: min(360px, calc(100vw - 24px));
-  background: #0b1220;
-  border: 1px solid rgba(255, 255, 255, .10);
-  border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
-  padding: 8px;
+/* Animate hamburger into X when open */
+body.drawer-open .hamburger__icon span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+body.drawer-open .hamburger__icon span:nth-child(2) {
+  opacity: 0;
+}
+
+body.drawer-open .hamburger__icon span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* =========================
+   Drawer (slide-out menu)
+========================= */
+.drawer {
+  position: fixed;
+  inset: 0;
   display: none;
-  z-index: 200;
+  z-index: 999;
 }
 
-.navMenu.is-open .navMenu__panel {
+.drawer.is-open {
   display: block;
 }
 
-.navMenu__panel a {
+.drawer__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+}
+
+.drawer__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: min(320px, 86vw);
+  background: #0b1220;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, .10);
+  box-shadow: 18px 0 40px rgba(0, 0, 0, .35);
+  transform: translateX(-102%);
+  transition: transform .22s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer.is-open .drawer__panel {
+  transform: translateX(0);
+}
+
+.drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, .10);
+}
+
+.drawer__close {
+  border: 0;
+  background: rgba(255, 255, 255, .10);
+  color: #fff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.drawer__close:hover {
+  background: rgba(255, 255, 255, .14);
+}
+
+.drawer__nav {
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: auto;
+}
+
+.drawer__nav a {
   display: block;
-  padding: 10px 10px;
+  padding: 12px 12px;
   border-radius: 12px;
   color: rgba(255, 255, 255, .95);
 }
 
-.navMenu__panel a:hover {
+.drawer__nav a:hover {
   background: rgba(255, 255, 255, .10);
   text-decoration: none;
 }
 
-@media (max-width: 420px) {
-  .navMenu__panel {
-    left: 0;
-    right: 0;
-    min-width: auto;
-  }
+.drawer__footer {
+  margin-top: auto;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(255, 255, 255, .10);
+  color: rgba(255, 255, 255, .75);
+  font-size: 12px;
 }
 
-/* Hero */
+body.drawer-open {
+  overflow: hidden;
+}
+
+/* =========================
+   Hero
+========================= */
 .hero {
   background: linear-gradient(180deg, #c7d2fe 0%, var(--bg) 72%);
 }
@@ -369,7 +430,9 @@ a:hover {
   margin-top: 10px;
 }
 
-/* Buttons */
+/* =========================
+   Buttons
+========================= */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -415,7 +478,9 @@ a:hover {
   filter: brightness(1.04);
 }
 
-/* Layout (mobile-first: single column) */
+/* =========================
+   Layout + Shared Sections
+========================= */
 .layout {
   max-width: var(--max);
   margin: 0 auto;
@@ -426,7 +491,51 @@ a:hover {
   align-items: start;
 }
 
-/* Filters drawer/desktop sidebar */
+.results__bar {
+  background: rgba(255, 255, 255, .75);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.results__bar em {
+  color: #374151;
+}
+
+.sort select {
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.footer {
+  margin: 18px 0 30px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+}
+
+.noResults {
+  margin-top: 12px;
+  background: rgba(255, 255, 255, .75);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.noResults small {
+  color: var(--muted);
+}
+
+/* =========================
+   Filters (shop)
+========================= */
 .filtersShell {
   margin: 0;
 }
@@ -498,31 +607,9 @@ a:hover {
   border-radius: 10px;
 }
 
-/* Results */
-.results__bar {
-  background: rgba(255, 255, 255, .75);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 12px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.results__bar em {
-  color: #374151;
-}
-
-.sort select {
-  width: 100%;
-  padding: 10px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  background: #fff;
-}
-
-/* Product grid */
+/* =========================
+   Product Grid (shop)
+========================= */
 .grid {
   margin-top: 12px;
   display: grid;
@@ -609,84 +696,90 @@ a:hover {
   color: var(--muted);
 }
 
-/* No results */
-.noResults {
+/* =========================
+   Shared Tags
+========================= */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .7);
+  font-size: 12px;
+  font-weight: 800;
+  color: #111;
+}
+
+/* =========================
+   Staff Page
+========================= */
+.staffGrid {
   margin-top: 12px;
-  background: rgba(255, 255, 255, .75);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+.staffCard {
+  background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  box-shadow: var(--shadow);
   padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
 }
 
-.noResults small {
+.staffCard__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: linear-gradient(180deg, #f3f4f6 0%, #fff 100%);
+  flex: 0 0 auto;
+}
+
+.staffCard__name {
+  margin: 0 0 2px;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.staffCard__role {
+  margin: 0 0 8px;
   color: var(--muted);
+  font-size: 13px;
 }
 
-.footer {
-  margin: 18px 0 30px;
-  color: var(--muted);
-  text-align: center;
-  font-size: 12px;
+.staffCard__meta {
+  margin: 0 0 10px;
+  padding-left: 18px;
+  color: var(--ink);
+  font-size: 13px;
 }
 
-/* Breakpoints */
-@media (min-width: 700px) {
-  .results__bar {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .sort select {
-    width: auto;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.staffCard__meta li {
+  margin: 4px 0;
 }
 
-@media (min-width: 1024px) {
-  .topbar__row {
-    grid-template-columns: auto auto 1fr auto;
-    grid-template-areas: "brand loc search acct";
-    gap: 12px;
-  }
-
-  .cart {
-    display: none;
-  }
-
-  .account {
-    justify-content: flex-end;
-  }
-
-  .layout {
-    grid-template-columns: 280px 1fr;
-  }
-
-  .filtersShell__summary {
-    display: none;
-  }
-
-  .filtersShell[open] .filters {
-    margin-top: 0;
-  }
-
-  .filters {
-    margin-top: 0;
-    position: sticky;
-    top: 110px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+.staffCard__meta strong {
+  font-weight: 900;
 }
 
-/* styles.css (ADD THESE at the bottom, after the staff styles if you added them) */
+.staffCard__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 
-/* About page */
+/* =========================
+   About Page
+========================= */
 .aboutGrid {
   margin-top: 12px;
   display: grid;
@@ -775,114 +868,9 @@ a:hover {
   margin-top: 10px;
 }
 
-/* Tablet */
-@media (min-width: 700px) {
-  .aboutGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Desktop: keep two columns; the left sidebar already appears from your base layout */
-@media (min-width: 1024px) {
-  .aboutGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* styles.css (ADD THESE at the bottom) */
-
-/* Staff page */
-.staffGrid {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap);
-}
-
-.staffCard {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 12px;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-
-.staffCard__avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  background: linear-gradient(180deg, #f3f4f6 0%, #fff 100%);
-  flex: 0 0 auto;
-}
-
-.staffCard__name {
-  margin: 0 0 2px;
-  font-size: 16px;
-  line-height: 1.2;
-}
-
-.staffCard__role {
-  margin: 0 0 8px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.staffCard__meta {
-  margin: 0 0 10px;
-  padding-left: 18px;
-  color: var(--ink);
-  font-size: 13px;
-}
-
-.staffCard__meta li {
-  margin: 4px 0;
-}
-
-.staffCard__meta strong {
-  font-weight: 900;
-}
-
-.staffCard__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, .7);
-  font-size: 12px;
-  font-weight: 800;
-  color: #111;
-}
-
-/* Tablet+ */
-@media (min-width: 700px) {
-  .staffGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .staffGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* ADD to styles.css */
-
+/* =========================
+   Hooks Page + Random Hook
+========================= */
 .hooksGrid {
   margin-top: 12px;
   display: grid;
@@ -911,12 +899,6 @@ a:hover {
 
 .hookCard li {
   margin: 8px 0;
-}
-
-@media (min-width: 700px) {
-  .hooksGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 /* Random Hook Generator */
@@ -951,5 +933,92 @@ a:hover {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* =========================
+   Responsive Breakpoints
+========================= */
+@media (min-width: 700px) {
+  .results__bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sort select {
+    width: auto;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .staffGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aboutGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hooksGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+
+  /* Desktop header becomes one line */
+  .topbar__row {
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-areas: "brand loc search acct";
+    gap: 12px;
+  }
+
+  /* Optional desktop choice: hide the small cart in header */
+  .cart {
+    display: none;
+  }
+
+  .account {
+    justify-content: flex-end;
+  }
+
+  /* Desktop layout gets sidebar */
+  .layout {
+    grid-template-columns: 280px 1fr;
+  }
+
+  /* Filters become sticky sidebar; summary button hidden */
+  .filtersShell__summary {
+    display: none;
+  }
+
+  .filtersShell[open] .filters {
+    margin-top: 0;
+  }
+
+  .filters {
+    margin-top: 0;
+    position: sticky;
+    top: 110px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Staff/About/Hooks content usually lives in the right column; keep 2-column grids */
+  .staffGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aboutGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hooksGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
