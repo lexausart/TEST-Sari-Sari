@@ -747,13 +747,6 @@ body.drawer-open {
 .staffCard__gif {
   width: 100px;
   height: 100px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  background: linear-gradient(180deg, #f3f4f6 0%, #fff 100%);
-  flex: 0 0 auto;
 }
 
 .staffCard__name {
