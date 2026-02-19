@@ -62,24 +62,6 @@
         </div>
     </header>
 
-    <!-- SAME DRAWER -->
-    <div class="drawer" data-drawer aria-hidden="true">
-        <div class="drawer__overlay" data-drawer-close tabindex="-1"></div>
-        <aside id="drawerMenu" class="drawer__panel" role="dialog" aria-modal="true" aria-label="All categories">
-            <div class="drawer__head">
-                <strong>All Categories</strong>
-                <button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">✕</button>
-            </div>
-            <nav class="drawer__nav">
-                <a href="#">Today’s Deals-ish</a>
-                <a href="#">Sari Bundles</a>
-                <a href="#">Aether-Safe</a>
-                <a href="#">Engineering Picks</a>
-                <a href="#">Questionable Wisdom</a>
-            </nav>
-        </aside>
-    </div>
-
     <!-- PAGE CONTENT -->
     <section class="hero" aria-label="RP Hooks banner">
         <div class="hero__inner">
@@ -95,9 +77,23 @@
         </div>
     </section>
 
+    <div class="hero__cta">
+        <a class="btn btn--primary" href="#shopHooks">Shop Hooks</a>
+        <a class="btn btn--ghost" href="#chaosHooks">Chaos Hooks</a>
+        <button class="btn btn--primary" id="randomHookBtn" type="button">
+            🎲 Generate Random Hook
+        </button>
+    </div>
+
+
     <main class="layout" role="main">
         <section class="results" aria-label="RP Hooks content">
-
+            <div class="randomHookBox" id="randomHookBox" hidden>
+                <strong>Your Hook:</strong>
+                <p id="randomHookText"></p>
+                <p id="randomHookText2"></p>
+                <p id="randomHookText3"></p>
+            </div>
             <div class="hooksGrid">
 
                 <!-- SHOP HOOKS -->
