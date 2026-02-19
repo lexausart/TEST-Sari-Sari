@@ -833,11 +833,6 @@ a:hover {
     gap: 12px;
   }
 
-  /* Optional desktop choice: hide the small cart in header */
-  .cart {
-    display: none;
-  }
-
   .account {
     justify-content: flex-end;
   }
