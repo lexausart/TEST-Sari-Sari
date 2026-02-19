@@ -1,0 +1,254 @@
+<!-- staff.html -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tangazon — Staff</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- SAME HEADER -->
+    <header class="topbar" role="banner">
+        <div class="topbar__row">
+            <a class="brand" href="index.html" aria-label="Tangazon home">
+                <span class="brand__logo">tangazon</span>
+                <span class="brand__tag">.ph? maybe</span>
+            </a>
+
+            <a class="cart" href="#" aria-label="Cart">
+                <span class="cart__count" aria-hidden="true">0</span>
+                🧺 <strong>Cart</strong>
+            </a>
+
+            <button class="pill location" type="button" aria-label="Deliver to">
+                Deliver to <strong>Bisaya Island</strong>
+            </button>
+
+            <form class="search" role="search" aria-label="Product search" action="index.html">
+                <label class="sr-only" for="q">Search Tangazon</label>
+                <select class="search__select" aria-label="Department">
+                    <option>All</option>
+                    <option>Snacks</option>
+                    <option>Drinks</option>
+                    <option>Household</option>
+                    <option>Gacha & Trinkets</option>
+                    <option>“Not Cursed”</option>
+                </select>
+                <input id="q" class="search__input" placeholder="Search: chicharron, calamansi, aether batteries…" />
+                <button class="search__btn" type="submit" aria-label="Search">🔎</button>
+            </form>
+
+            <nav class="account" aria-label="Account links">
+                <a class="account__item" href="staff.html">
+                    <span class="small">Meet the crew</span>
+                    <strong>Staff</strong>
+                </a>
+                <a class="account__item" href="#">
+                    <span class="small">Returns</span>
+                    <strong>& Orders</strong>
+                </a>
+            </nav>
+        </div>
+
+        <div class="topbar__strip" role="navigation" aria-label="Categories">
+            <!-- Drawer hamburger -->
+            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false"
+                aria-controls="drawerMenu">
+                <span class="hamburger__icon" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                </span>
+                <span class="hamburger__text">All</span>
+            </button>
+
+            <a class="stripLink" href="index.html">Shop</a>
+            <a class="stripLink" href="staff.html">Staff</a>
+            <a class="stripLink" href="#">Help (maybe)</a>
+        </div>
+    </header>
+
+    <!-- SAME DRAWER (right after header) -->
+    <div class="drawer" data-drawer aria-hidden="true">
+        <div class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="Close menu overlay"></div>
+
+        <aside id="drawerMenu" class="drawer__panel" role="dialog" aria-modal="true" aria-label="All categories">
+            <div class="drawer__head">
+                <strong>All Categories</strong>
+                <button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">✕</button>
+            </div>
+
+            <nav class="drawer__nav" aria-label="Category links">
+                <a href="index.html#">Today’s Deals-ish</a>
+                <a href="index.html#">Sari Bundles</a>
+                <a href="index.html#">Aether-Safe</a>
+                <a href="index.html#">Euclid’s “Engineering Picks”</a>
+                <a href="index.html#">Tito Whiskey’s Questionable Wisdom</a>
+                <a href="index.html#">Gift Cards (IOUs)</a>
+            </nav>
+
+            <div class="drawer__footer">
+                <small>Prime-ish shipping not available in areas with active sidequests.</small>
+            </div>
+        </aside>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <section class="hero" aria-label="Staff banner">
+        <div class="hero__inner">
+            <h1>Meet the Staff</h1>
+            <p>
+                Tangazon is powered by a small team of professionals, gremlins, and one person who is
+                <em>definitely</em> not smuggling anything.
+            </p>
+            <div class="hero__cta">
+                <a class="btn btn--primary" href="index.html">Back to Shop</a>
+                <a class="btn btn--ghost" href="#team">View Team</a>
+            </div>
+            <p class="hero__fineprint">*All staff bios are self-reported. Accuracy may vary with moon phase.</p>
+        </div>
+    </section>
+
+    <main class="layout" role="main">
+        <section class="results" aria-label="Staff directory" id="team">
+            <div class="results__bar">
+                <div class="results__count">
+                    <strong>7</strong> staff members • <em>0 HR complaints logged (somehow)</em>
+                </div>
+                <div class="sort">
+                    <a class="btn btn--small btn--ghost" href="index.html">Shop</a>
+                </div>
+            </div>
+
+            <div class="staffGrid" aria-label="Staff grid">
+                <article class="staffCard">
+                    <div class="staffCard__avatar" aria-hidden="true">🛒</div>
+                    <div class="staffCard__body">
+                        <h3 class="staffCard__name">Hantang Bulan “Tang”</h3>
+                        <p class="staffCard__role">Owner • Shopkeeper • Crisis negotiator</p>
+                        <ul class="staffCard__meta">
+                            <li><strong>Specialty:</strong> finding deals and feelings</li>
+                            <li><strong>Weakness:</strong> letting sidequests win</li>
+                            <li><strong>Fun fact:</strong> can restock shelves while judging you lovingly</li>
+                        </ul>
+                        <div class="staffCard__tags">
+                            <span class="tag">Sari-Sari</span><span class="tag">Babaylan-ish</span><span
+                                class="tag">Main Character Energy</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="staffCard">
+                    <div class="staffCard__avatar" aria-hidden="true">🔧</div>
+                    <div class="staffCard__body">
+                        <h3 class="staffCard__name">Euclid</h3>
+                        <p class="staffCard__role">Engineer • Logistics • “I can fix it” guy</p>
+                        <ul class="staffCard__meta">
+                            <li><strong>Specialty:</strong> aether batteries + overbuilding shelves</li>
+                            <li><strong>Weakness:</strong> Tang’s smile (systems fail)</li>
+                            <li><strong>Fun fact:</strong> calibrates products like they’re rockets</li>
+                        </ul>
+                        <div class="staffCard__tags">
+                            <span class="tag">Engineering Picks</span><span class="tag">Prime-ish Runner</span><span
+                                class="tag">Soft Boy</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="staffCard">
+                    <div class="staffCard__avatar" aria-hidden="true">☀️</div>
+                    <div class="staffCard__body">
+                        <h3 class="staffCard__name">Alunsina “Sunny”</h3>
+                        <p class="staffCard__role">Taste Tester • Vibes • Occasional tamawo mystery</p>
+                        <ul class="staffCard__meta">
+                            <li><strong>Specialty:</strong> citrus, gossip, and disappearing politely</li>
+                            <li><strong>Weakness:</strong> shiny trinkets (and drama)</li>
+                            <li><strong>Fun fact:</strong> can make any drink feel like a plot device</li>
+                        </ul>
+                        <div class="staffCard__tags">
+                            <span class="tag">Drinks</span><span class="tag">Blessing Included</span><span
+                                class="tag">Chaotic Good</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="staffCard">
+                    <div class="staffCard__avatar" aria-hidden="true">🏴‍☠️</div>
+                    <div class="staffCard__body">
+                        <h3 class="staffCard__name">Dayang Kalinga</h3>
+                        <p class="staffCard__role">Pirate Captain • Procurement • “Found it” specialist</p>
+                        <ul class="staffCard__meta">
+                            <li><strong>Specialty:</strong> sourcing rare goods at suspicious discounts</li>
+                            <li><strong>Weakness:</strong> none (allegedly)</li>
+                            <li><strong>Fun fact:</strong> “returns” policy becomes “duel” policy</li>
+                        </ul>
+                        <div class="staffCard__tags">
+                            <span class="tag">Imports</span><span class="tag">No Receipts</span><span class="tag">Boss
+                                Energy</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="staffCard">
+                    <div class="staffCard__avatar" aria-hidden="true">🥃</div>
+                    <div class="staffCard__body">
+                        <h3 class="staffCard__name">Tito Whiskey</h3>
+                        <p class="staffCard__role">Consultant • Wisdom Vendor • Definitely not a scam</p>
+                        <ul class="staffCard__meta">
+                            <li><strong>Specialty:</strong> questionable advice with perfect confidence</li>
+                            <li><strong>Weakness:</strong> free snacks (exploitable)</li>
+                            <li><strong>Fun fact:</strong> his “juice” reviews are legally complicated</li>
+                        </ul>
+                        <div class="staffCard__tags">
+                            <span class="tag">Tito-Approved</span><span class="tag">Cursed-ish</span><span
+                                class="tag">Comedy</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="staffCard">
+                    <div class="staffCard__avatar" aria-hidden="true">🧨</div>
+                    <div class="staffCard__body">
+                        <h3 class="staffCard__name">Iara</h3>
+                        <p class="staffCard__role">Assistant • Inventor • Chaos intern</p>
+                        <ul class="staffCard__meta">
+                            <li><strong>Specialty:</strong> “helping” (things explode)</li>
+                            <li><strong>Weakness:</strong> being told “no”</li>
+                            <li><strong>Fun fact:</strong> can pack orders faster than physics allows</li>
+                        </ul>
+                        <div class="staffCard__tags">
+                            <span class="tag">Gremlin</span><span class="tag">Same-day</span><span
+                                class="tag">Genius</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="staffCard">
+                    <div class="staffCard__avatar" aria-hidden="true">🧠</div>
+                    <div class="staffCard__body">
+                        <h3 class="staffCard__name">Caio</h3>
+                        <p class="staffCard__role">Assistant • Strategist • Counter-scam division</p>
+                        <ul class="staffCard__meta">
+                            <li><strong>Specialty:</strong> plans that almost work (dangerously)</li>
+                            <li><strong>Weakness:</strong> Tang noticing (instantly)</li>
+                            <li><strong>Fun fact:</strong> can negotiate candy rates like a lawyer</li>
+                        </ul>
+                        <div class="staffCard__tags">
+                            <span class="tag">Gremlin</span><span class="tag">Tactics</span><span class="tag">Sugar
+                                Lawyer</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- SAME FOOTER -->
+            <footer class="footer">
+                <p>© Tangazon. Powered by vibes, duct tape, and sidequests.</p>
+            </footer>
+        </section>
+    </main>
+</body>
+
+</html>

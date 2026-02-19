@@ -1,0 +1,170 @@
+<!-- hooks.html -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tangazon — RP Hooks</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- SAME HEADER -->
+    <header class="topbar" role="banner">
+        <div class="topbar__row">
+            <a class="brand" href="index.html" aria-label="Tangazon home">
+                <span class="brand__logo">tangazon</span>
+                <span class="brand__tag">.ph? maybe</span>
+            </a>
+
+            <a class="cart" href="#" aria-label="Cart">
+                <span class="cart__count" aria-hidden="true">0</span>
+                🧺 <strong>Cart</strong>
+            </a>
+
+            <button class="pill location" type="button" aria-label="Deliver to">
+                Deliver to <strong>Bisaya Island</strong>
+            </button>
+
+            <form class="search" role="search" aria-label="Product search" action="index.html">
+                <label class="sr-only" for="q">Search Tangazon</label>
+                <select class="search__select" aria-label="Department">
+                    <option>All</option>
+                    <option>Snacks</option>
+                    <option>Drinks</option>
+                    <option>Household</option>
+                    <option>Gacha & Trinkets</option>
+                    <option>“Not Cursed”</option>
+                </select>
+                <input id="q" class="search__input" placeholder="Search for hooks…" />
+                <button class="search__btn" type="submit" aria-label="Search">🔎</button>
+            </form>
+
+            <nav class="account" aria-label="Account links">
+                <a class="account__item" href="hooks.html">
+                    <span class="small">Start something</span>
+                    <strong>RP Hooks</strong>
+                </a>
+                <a class="account__item" href="staff.html">
+                    <span class="small">Meet the crew</span>
+                    <strong>Staff</strong>
+                </a>
+            </nav>
+        </div>
+
+        <div class="topbar__strip" role="navigation" aria-label="Categories">
+            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false"
+                aria-controls="drawerMenu">
+                <span class="hamburger__icon" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                </span>
+                <span class="hamburger__text">All</span>
+            </button>
+
+            <a class="stripLink" href="index.html">Shop</a>
+            <a class="stripLink" href="about.html">About</a>
+            <a class="stripLink" href="hooks.html">RP Hooks</a>
+            <a class="stripLink" href="staff.html">Staff</a>
+        </div>
+    </header>
+
+    <!-- SAME DRAWER -->
+    <div class="drawer" data-drawer aria-hidden="true">
+        <div class="drawer__overlay" data-drawer-close tabindex="-1"></div>
+        <aside id="drawerMenu" class="drawer__panel" role="dialog" aria-modal="true" aria-label="All categories">
+            <div class="drawer__head">
+                <strong>All Categories</strong>
+                <button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">✕</button>
+            </div>
+            <nav class="drawer__nav">
+                <a href="#">Today’s Deals-ish</a>
+                <a href="#">Sari Bundles</a>
+                <a href="#">Aether-Safe</a>
+                <a href="#">Engineering Picks</a>
+                <a href="#">Questionable Wisdom</a>
+            </nav>
+        </aside>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <section class="hero" aria-label="RP Hooks banner">
+        <div class="hero__inner">
+            <h1>RP Hooks Board</h1>
+            <p>
+                Stuck on how to start? Pick a thread. Pull gently. See what unravels.
+            </p>
+            <div class="hero__cta">
+                <a class="btn btn--primary" href="#shopHooks">Shop Hooks</a>
+                <a class="btn btn--ghost" href="#chaosHooks">Chaos Hooks</a>
+            </div>
+            <p class="hero__fineprint">*Tang assumes no responsibility for emotional consequences.</p>
+        </div>
+    </section>
+
+    <main class="layout" role="main">
+        <section class="results" aria-label="RP Hooks content">
+
+            <div class="hooksGrid">
+
+                <!-- SHOP HOOKS -->
+                <article class="hookCard" id="shopHooks">
+                    <h2>🛒 Shop Interaction Hooks</h2>
+                    <ul>
+                        <li><strong>The Wrong Bag:</strong> You receive someone else’s order. It contains something
+                            strange.</li>
+                        <li><strong>IOU Wall:</strong> Your name is already written under “unpaid snacks.”</li>
+                        <li><strong>Price Debate:</strong> Tang insists the item costs “one story.”</li>
+                        <li><strong>Restock Run:</strong> Shelves are empty. Want to help fetch supplies?</li>
+                        <li><strong>Broken Machine:</strong> Euclid is fixing something loudly. It might explode.</li>
+                    </ul>
+                </article>
+
+                <!-- SOCIAL HOOKS -->
+                <article class="hookCard">
+                    <h2>☀️ Social & Slice-of-Life</h2>
+                    <ul>
+                        <li><strong>Rain Shelter:</strong> You duck in during a storm. Tang offers tea.</li>
+                        <li><strong>Lost Twin:</strong> One of the twins insists you’re “their friend.”</li>
+                        <li><strong>Rumor Board:</strong> A new gossip note mentions you.</li>
+                        <li><strong>Free Sample:</strong> Sunny hands you a drink “for vibes.”</li>
+                        <li><strong>Late Night:</strong> The store is quiet. Why are you here?</li>
+                    </ul>
+                </article>
+
+                <!-- CHAOS HOOKS -->
+                <article class="hookCard" id="chaosHooks">
+                    <h2>🧨 Chaos Hooks</h2>
+                    <ul>
+                        <li><strong>Cursed-ish Item:</strong> A trinket hums when you touch it.</li>
+                        <li><strong>Tito’s Advice:</strong> He gives you guidance you didn’t ask for.</li>
+                        <li><strong>Missing Shipment:</strong> A delivery never arrived.</li>
+                        <li><strong>Sidequest Notice:</strong> A request is pinned to the counter—urgent.</li>
+                        <li><strong>Unpaid Debt:</strong> Someone claims you owe them for something… from before.</li>
+                    </ul>
+                </article>
+
+                <!-- SOFT HOOKS -->
+                <article class="hookCard">
+                    <h2>🌙 Emotional Hooks</h2>
+                    <ul>
+                        <li><strong>Moon Phase:</strong> Tang seems quieter than usual.</li>
+                        <li><strong>Repair Request:</strong> Euclid needs help testing something delicate.</li>
+                        <li><strong>Memory Object:</strong> An item in the shop feels familiar.</li>
+                        <li><strong>Apology Note:</strong> Someone left a letter addressed to you.</li>
+                        <li><strong>Shared Silence:</strong> No chaos—just company.</li>
+                    </ul>
+                </article>
+
+            </div>
+
+            <!-- SAME FOOTER -->
+            <footer class="footer">
+                <p>© Tangazon. Powered by vibes, duct tape, and sidequests.</p>
+            </footer>
+        </section>
+    </main>
+</body>
+
+</html>

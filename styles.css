@@ -683,3 +683,238 @@ a:hover {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* styles.css (ADD THESE at the bottom, after the staff styles if you added them) */
+
+/* About page */
+.aboutGrid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+.aboutCard {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px;
+}
+
+.aboutCard h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.aboutCard p {
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+
+.aboutCard ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.aboutCard li {
+  margin: 6px 0;
+}
+
+.aboutCallout {
+  margin-top: 10px;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, .75);
+  font-size: 13px;
+}
+
+.aboutTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 6px;
+}
+
+.aboutFineprint {
+  margin: 0;
+  color: var(--muted);
+}
+
+.aboutList {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.faq {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, .7);
+  margin: 10px 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.faq p {
+  margin: 8px 0 0;
+  color: var(--ink);
+}
+
+.aboutButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Tablet */
+@media (min-width: 700px) {
+  .aboutGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop: keep two columns; the left sidebar already appears from your base layout */
+@media (min-width: 1024px) {
+  .aboutGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* styles.css (ADD THESE at the bottom) */
+
+/* Staff page */
+.staffGrid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+.staffCard {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.staffCard__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: linear-gradient(180deg, #f3f4f6 0%, #fff 100%);
+  flex: 0 0 auto;
+}
+
+.staffCard__name {
+  margin: 0 0 2px;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.staffCard__role {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.staffCard__meta {
+  margin: 0 0 10px;
+  padding-left: 18px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.staffCard__meta li {
+  margin: 4px 0;
+}
+
+.staffCard__meta strong {
+  font-weight: 900;
+}
+
+.staffCard__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .7);
+  font-size: 12px;
+  font-weight: 800;
+  color: #111;
+}
+
+/* Tablet+ */
+@media (min-width: 700px) {
+  .staffGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .staffGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ADD to styles.css */
+
+.hooksGrid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+.hookCard {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+}
+
+.hookCard h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.hookCard ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.hookCard li {
+  margin: 8px 0;
+}
+
+@media (min-width: 700px) {
+  .hooksGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,217 @@
+<!-- about.html -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tangazon — About</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- SAME HEADER -->
+    <header class="topbar" role="banner">
+        <div class="topbar__row">
+            <a class="brand" href="index.html" aria-label="Tangazon home">
+                <span class="brand__logo">tangazon</span>
+                <span class="brand__tag">.ph? maybe</span>
+            </a>
+
+            <a class="cart" href="#" aria-label="Cart">
+                <span class="cart__count" aria-hidden="true">0</span>
+                🧺 <strong>Cart</strong>
+            </a>
+
+            <button class="pill location" type="button" aria-label="Deliver to">
+                Deliver to <strong>Bisaya Island</strong>
+            </button>
+
+            <form class="search" role="search" aria-label="Product search" action="index.html">
+                <label class="sr-only" for="q">Search Tangazon</label>
+                <select class="search__select" aria-label="Department">
+                    <option>All</option>
+                    <option>Snacks</option>
+                    <option>Drinks</option>
+                    <option>Household</option>
+                    <option>Gacha & Trinkets</option>
+                    <option>“Not Cursed”</option>
+                </select>
+                <input id="q" class="search__input" placeholder="Search: chicharron, calamansi, aether batteries…" />
+                <button class="search__btn" type="submit" aria-label="Search">🔎</button>
+            </form>
+
+            <nav class="account" aria-label="Account links">
+                <a class="account__item" href="about.html">
+                    <span class="small">What is this</span>
+                    <strong>About</strong>
+                </a>
+                <a class="account__item" href="staff.html">
+                    <span class="small">Meet the crew</span>
+                    <strong>Staff</strong>
+                </a>
+            </nav>
+        </div>
+
+        <div class="topbar__strip" role="navigation" aria-label="Categories">
+            <!-- Drawer hamburger -->
+            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false"
+                aria-controls="drawerMenu">
+                <span class="hamburger__icon" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                </span>
+                <span class="hamburger__text">All</span>
+            </button>
+
+            <a class="stripLink" href="index.html">Shop</a>
+            <a class="stripLink" href="about.html">About</a>
+            <a class="stripLink" href="staff.html">Staff</a>
+            <a class="stripLink" href="#">Help (maybe)</a>
+        </div>
+    </header>
+
+    <!-- SAME DRAWER -->
+    <div class="drawer" data-drawer aria-hidden="true">
+        <div class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="Close menu overlay"></div>
+
+        <aside id="drawerMenu" class="drawer__panel" role="dialog" aria-modal="true" aria-label="All categories">
+            <div class="drawer__head">
+                <strong>All Categories</strong>
+                <button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">✕</button>
+            </div>
+
+            <nav class="drawer__nav" aria-label="Category links">
+                <a href="index.html#">Today’s Deals-ish</a>
+                <a href="index.html#">Sari Bundles</a>
+                <a href="index.html#">Aether-Safe</a>
+                <a href="index.html#">Euclid’s “Engineering Picks”</a>
+                <a href="index.html#">Tito Whiskey’s Questionable Wisdom</a>
+                <a href="index.html#">Gift Cards (IOUs)</a>
+            </nav>
+
+            <div class="drawer__footer">
+                <small>Prime-ish shipping not available in areas with active sidequests.</small>
+            </div>
+        </aside>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <section class="hero" aria-label="About banner">
+        <div class="hero__inner">
+            <h1>About Tangazon</h1>
+            <p>
+                Tangazon is Tang’s very legitimate, absolutely charming, <em>not-at-all suspicious</em>
+                sari-sari storefront—now with delivery and a little bit of plot.
+            </p>
+            <div class="hero__cta">
+                <a class="btn btn--primary" href="index.html">Shop Now</a>
+                <a class="btn btn--ghost" href="#story">Read the story</a>
+            </div>
+            <p class="hero__fineprint">*We reserve the right to bless your order if you look like you need it.</p>
+        </div>
+    </section>
+
+    <main class="layout" role="main">
+        <section class="results" aria-label="About content">
+            <div class="results__bar">
+                <div class="results__count">
+                    <strong>Our mission:</strong> convenience, comfort, and chaos—delivered with ginhawa.
+                </div>
+                <div class="sort">
+                    <a class="btn btn--small btn--ghost" href="staff.html">Meet the Staff</a>
+                </div>
+            </div>
+
+            <div class="aboutGrid" id="story">
+                <article class="aboutCard">
+                    <h2>What is a sari-sari store?</h2>
+                    <p>
+                        A sari-sari store is a tiny neighborhood shop: snacks, staples, and small comforts
+                        that keep daily life moving. Tangazon keeps that feeling—just scaled up for travelers
+                        who keep getting “accidentally” recruited into sidequests.
+                    </p>
+                    <ul>
+                        <li>Small goods, big convenience</li>
+                        <li>Friendly banter included (mandatory)</li>
+                        <li>Receipts optional. Vibes required.</li>
+                    </ul>
+                </article>
+
+                <article class="aboutCard">
+                    <h2>How we ship</h2>
+                    <p>
+                        We run on <strong>Prime-ish</strong> delivery: fast when the roads are clear,
+                        slower when the twins “help,” and mysteriously instant when Sunny feels like being dramatic.
+                    </p>
+                    <div class="aboutCallout">
+                        <strong>Prime-ish guarantee:</strong>
+                        arrives between “soon” and “after the next cutscene.”
+                    </div>
+                </article>
+
+                <article class="aboutCard">
+                    <h2>What we sell</h2>
+                    <p>
+                        The classics (snacks, drinks, household) plus a curated selection of trinkets that are
+                        <em>mostly</em> safe. Euclid insists on labeling everything. Tang insists labels are a
+                        suggestion.
+                    </p>
+                    <div class="aboutTags" aria-label="Highlights">
+                        <span class="tag">Snacks</span>
+                        <span class="tag">Drinks</span>
+                        <span class="tag">Household</span>
+                        <span class="tag">Trinkets</span>
+                        <span class="tag">Not Cursed*</span>
+                    </div>
+                    <p class="aboutFineprint"><small>*“Not Cursed” means “probably fine.”</small></p>
+                </article>
+
+                <article class="aboutCard">
+                    <h2>Our values</h2>
+                    <ul class="aboutList">
+                        <li><strong>Ginhawa:</strong> relief, ease, and warmth in small things.</li>
+                        <li><strong>Community:</strong> everyone gets fed (even rivals).</li>
+                        <li><strong>Consent:</strong> we do not bless you without permission. (Tang… usually.)</li>
+                        <li><strong>Craft:</strong> if Euclid builds it, it’s over-engineered and beautiful.</li>
+                    </ul>
+                </article>
+
+                <article class="aboutCard">
+                    <h2>FAQ</h2>
+                    <details class="faq">
+                        <summary>Is Tito Whiskey real?</summary>
+                        <p>Define “real.” He’s here, he’s loud, and he accepts offerings of snacks.</p>
+                    </details>
+                    <details class="faq">
+                        <summary>Can I return “juice”?</summary>
+                        <p>Yes. Please return it unopened. Please do not ask what happens if opened.</p>
+                    </details>
+                    <details class="faq">
+                        <summary>Do you have customer support?</summary>
+                        <p>Yes. Tang. You will be gently roasted and then helped immediately.</p>
+                    </details>
+                </article>
+
+                <article class="aboutCard">
+                    <h2>Contact</h2>
+                    <p>
+                        For orders, questions, and spiritual misunderstandings, visit the shop or send a message through
+                        the nearest wind current. If that fails, try leaving a note by the dalakit tree.
+                    </p>
+                    <div class="aboutButtons">
+                        <a class="btn btn--primary" href="index.html">Browse Products</a>
+                        <a class="btn btn--ghost" href="staff.html">Staff Directory</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- SAME FOOTER -->
+            <footer class="footer">
+                <p>© Tangazon. Powered by vibes, duct tape, and sidequests.</p>
+            </footer>
+        </section>
+    </main>
+</body>
+
+</html>
