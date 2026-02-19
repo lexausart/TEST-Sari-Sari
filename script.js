@@ -384,3 +384,291 @@
         box.style.animation = "";
     });
 })();
+
+// =========================
+// Real Cart System (localStorage)
+// =========================
+(() => {
+  const CART_KEY = "tangazon_cart_v1";
+
+  // --- DOM bits (safe on pages without cart modal) ---
+  const modal = document.getElementById("cartModal");
+  const cartBtn = document.querySelector(".cart");
+  const cartBadge = document.querySelector(".cart__count");
+
+  const itemsHost = document.getElementById("cartItems");
+  const emptyEl = document.getElementById("cartEmpty");
+  const totalEl = document.getElementById("cartTotal");
+  const taxEl = document.getElementById("cartEmotionalTax");
+  const checkoutBtn = document.getElementById("checkoutBtn");
+
+  // If there is no grid on this page, we still want the cart modal/badge to work.
+  const grid = document.querySelector(".grid");
+
+  // --- Cart state ---
+  /** cart = { [id]: { id, name, price, qty } } */
+  let cart = loadCart();
+
+  function loadCart() {
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      if (!raw) return {};
+      const parsed = JSON.parse(raw);
+      return (parsed && typeof parsed === "object") ? parsed : {};
+    } catch {
+      return {};
+    }
+  }
+
+  function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+
+  function formatPeso(n) {
+    // Keep it simple: ₱ + integer
+    const v = Math.max(0, Math.round(Number(n) || 0));
+    return `₱${v}`;
+  }
+
+  function cartCount() {
+    return Object.values(cart).reduce((sum, it) => sum + (it.qty || 0), 0);
+  }
+
+  function cartSubtotal() {
+    return Object.values(cart).reduce((sum, it) => sum + (it.price * it.qty), 0);
+  }
+
+  function emotionalTax(subtotal) {
+    // Comedic but predictable: 3% + ₱7 if subtotal > 0
+    if (subtotal <= 0) return 0;
+    return Math.round(subtotal * 0.03) + 7;
+  }
+
+  function updateBadge() {
+    if (!cartBadge) return;
+    cartBadge.textContent = String(cartCount());
+  }
+
+  function ensureToast(message) {
+    // If you already have a toast() elsewhere, use it.
+    if (typeof window.toast === "function") return window.toast(message);
+
+    // Minimal inline toast fallback
+    const el = document.createElement("div");
+    el.textContent = message;
+    el.style.position = "fixed";
+    el.style.left = "50%";
+    el.style.bottom = "18px";
+    el.style.transform = "translate(-50%, 12px)";
+    el.style.opacity = "0";
+    el.style.pointerEvents = "none";
+    el.style.background = "rgba(17,24,39,.92)";
+    el.style.color = "#fff";
+    el.style.padding = "10px 12px";
+    el.style.borderRadius = "999px";
+    el.style.boxShadow = "0 10px 28px rgba(0,0,0,.22)";
+    el.style.font = "800 13px/1.1 system-ui";
+    el.style.zIndex = "9999";
+    el.style.maxWidth = "calc(100vw - 24px)";
+    el.style.whiteSpace = "nowrap";
+    el.style.overflow = "hidden";
+    el.style.textOverflow = "ellipsis";
+    el.style.transition = "opacity .18s ease, transform .18s ease";
+    document.body.appendChild(el);
+
+    requestAnimationFrame(() => {
+      el.style.opacity = "1";
+      el.style.transform = "translate(-50%, 0)";
+    });
+
+    setTimeout(() => {
+      el.style.opacity = "0";
+      el.style.transform = "translate(-50%, 12px)";
+      setTimeout(() => el.remove(), 200);
+    }, 1200);
+  }
+
+  // --- Rendering ---
+  function renderCart() {
+    updateBadge();
+    if (!itemsHost || !totalEl || !taxEl || !emptyEl) return;
+
+    const items = Object.values(cart);
+    const subtotal = cartSubtotal();
+    const tax = emotionalTax(subtotal);
+
+    totalEl.textContent = formatPeso(subtotal);
+    taxEl.textContent = formatPeso(tax);
+
+    if (items.length === 0) {
+      itemsHost.innerHTML = "";
+      emptyEl.hidden = false;
+      return;
+    }
+
+    emptyEl.hidden = true;
+
+    const list = document.createElement("div");
+    list.className = "cartList";
+
+    for (const it of items) {
+      const row = document.createElement("div");
+      row.className = "cartItem";
+      row.dataset.id = it.id;
+
+      row.innerHTML = `
+        <div class="cartItem__top">
+          <div>
+            <p class="cartItem__name">${escapeHtml(it.name)}</p>
+            <p class="cartItem__meta">Unit price: ${formatPeso(it.price)}</p>
+          </div>
+          <div class="cartItem__price">${formatPeso(it.price * it.qty)}</div>
+        </div>
+
+        <div class="cartItem__controls">
+          <div class="qty" aria-label="Quantity controls">
+            <button type="button" data-qty="dec" aria-label="Decrease quantity">−</button>
+            <span aria-label="Quantity">${it.qty}</span>
+            <button type="button" data-qty="inc" aria-label="Increase quantity">+</button>
+          </div>
+
+          <button class="cartItem__remove" type="button" data-remove="1">
+            Remove (I regret this)
+          </button>
+        </div>
+      `;
+
+      list.appendChild(row);
+    }
+
+    itemsHost.innerHTML = "";
+    itemsHost.appendChild(list);
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  // --- Mutations ---
+  function addItem({ id, name, price }) {
+    if (!id) return;
+    const p = Number(price);
+    if (!Number.isFinite(p)) return;
+
+    if (!cart[id]) cart[id] = { id, name: name || "Mystery Item", price: Math.round(p), qty: 0 };
+    cart[id].qty += 1;
+
+    saveCart();
+    renderCart();
+  }
+
+  function setQty(id, qty) {
+    if (!cart[id]) return;
+    const q = Math.max(0, Math.round(Number(qty) || 0));
+    if (q === 0) delete cart[id];
+    else cart[id].qty = q;
+
+    saveCart();
+    renderCart();
+  }
+
+  function incQty(id, delta) {
+    if (!cart[id]) return;
+    setQty(id, cart[id].qty + delta);
+  }
+
+  // --- Hook up Add to Cart buttons (delegated) ---
+  if (grid) {
+    grid.addEventListener("click", (e) => {
+      const btn = e.target.closest(".btn--add");
+      if (!btn) return;
+
+      const card = btn.closest(".card");
+      if (!card) return;
+
+      const id = card.getAttribute("data-id") || (card.querySelector(".card__title")?.textContent || "").trim();
+      const name = card.getAttribute("data-name") || (card.querySelector(".card__title")?.textContent || "Item").trim();
+      const price = card.getAttribute("data-price");
+
+      addItem({ id, name, price });
+      ensureToast(`Added: ${name}`);
+    });
+  }
+
+  // --- Cart modal open/close ---
+  if (modal && cartBtn) {
+    const closeEls = modal.querySelectorAll("[data-cart-close]");
+    let lastFocus = null;
+
+    const open = (e) => {
+      e.preventDefault();
+      lastFocus = document.activeElement;
+
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("drawer-open"); // reuse your scroll-lock class
+      renderCart();
+
+      // focus close button
+      const closeBtn = modal.querySelector(".cartModal__close");
+      closeBtn && closeBtn.focus();
+    };
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("drawer-open");
+
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    };
+
+    cartBtn.addEventListener("click", open);
+    closeEls.forEach((el) => el.addEventListener("click", close));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+    });
+
+    // Cart item controls inside modal
+    modal.addEventListener("click", (e) => {
+      const itemEl = e.target.closest(".cartItem");
+      if (!itemEl) return;
+      const id = itemEl.dataset.id;
+
+      const qtyBtn = e.target.closest("[data-qty]");
+      if (qtyBtn) {
+        const dir = qtyBtn.getAttribute("data-qty");
+        if (dir === "inc") incQty(id, +1);
+        if (dir === "dec") incQty(id, -1);
+        return;
+      }
+
+      const rmBtn = e.target.closest("[data-remove]");
+      if (rmBtn) {
+        setQty(id, 0);
+        ensureToast("Removed. The cart is now slightly less dramatic.");
+      }
+    });
+
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener("click", () => {
+        const subtotal = cartSubtotal();
+        if (subtotal <= 0) {
+          ensureToast("Checkout denied. Add snacks first.");
+          return;
+        }
+        ensureToast("Checkout initiated… (bravely).");
+      });
+    }
+  }
+
+  // Initial badge render on every page load
+  renderCart();
+})();
+
+
