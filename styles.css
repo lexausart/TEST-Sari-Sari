@@ -829,7 +829,7 @@ a:hover {
   /* Desktop header becomes one line */
   .topbar__row {
     grid-template-columns: auto auto 1fr auto;
-    grid-template-areas: "brand loc search acct";
+    grid-template-areas: "brand loc search acct cart";
     gap: 12px;
   }
 
