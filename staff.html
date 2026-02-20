@@ -231,6 +231,53 @@
             </footer>
         </section>
     </main>
+
+    <!-- CART MODAL -->
+<div class="cartModal" id="cartModal" aria-hidden="true">
+  <div class="cartModal__overlay" data-cart-close></div>
+
+  <div class="cartModal__panel" role="dialog" aria-modal="true" aria-label="Shopping cart">
+    <div class="cartModal__header">
+      <h2>Your Cart</h2>
+      <button class="cartModal__close" type="button" data-cart-close aria-label="Close cart">✕</button>
+    </div>
+
+    <div class="cartModal__body">
+      <div id="cartItems"></div>
+
+      <div class="cartModal__empty" id="cartEmpty" hidden>
+        <p><strong>Your cart is emotionally empty.</strong></p>
+        <p class="muted">Tang suggests adding snacks. R'tehz suggests adding magitek. Brynley suggests adding violence.</p>
+      </div>
+    </div>
+
+    <div class="cartModal__footer">
+      <div class="cartModal__line">
+        <span>Subtotal</span>
+        <strong id="cartTotal">₱0</strong>
+      </div>
+      <div class="cartModal__line">
+        <span>Emotional Tax</span>
+        <strong id="cartEmotionalTax">₱0</strong>
+      </div>
+
+      <small class="cartModal__fineprint">
+        *Emotional Tax increases if you hesitate at checkout.
+      </small>
+
+      <div class="cartModal__actions">
+        <button class="btn btn--primary" type="button" id="checkoutBtn">
+          Proceed to Checkout (bravely)
+        </button>
+        <button class="btn btn--ghost" type="button" data-cart-close>
+          Fine. I’ll think about it.
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 
 </html>
