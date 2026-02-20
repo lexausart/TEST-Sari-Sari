@@ -1037,3 +1037,73 @@ a:hover {
   }
   .cartModal.is-open .cartModal__panel{ transform:translateY(0); }
 }
+
+/* =========================
+   Cactpot Prize Board
+========================= */
+
+.hookCard--cactpot{
+  border:2px dashed var(--accent);
+}
+
+.hookCard__gif{
+  width:100%;
+  border-radius:var(--radius2);
+  margin:10px 0 12px;
+}
+
+.hookIntro{
+  margin:0 0 12px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.prizeBoard{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.prizeTier{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:var(--radius2);
+  background:#fff;
+  transition:transform .08s ease, box-shadow .08s ease;
+}
+
+.prizeTier:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.prizeRange{
+  flex:0 0 90px;
+  font-weight:900;
+  font-size:13px;
+  color:var(--accent);
+}
+
+.prizeReward{
+  flex:1;
+  font-size:14px;
+}
+
+.prizeReward ul{
+  margin:6px 0 0;
+  padding-left:18px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.prizeTier--legendary{
+  border:2px solid gold;
+  background:linear-gradient(135deg,#fff9c4,#fff);
+}
+
+.prizeTier--legendary .prizeRange{
+  color:#b8860b;
+}

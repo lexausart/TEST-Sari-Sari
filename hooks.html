@@ -87,9 +87,6 @@
         </div>
     </section>
 
-
-
-
     <main class="layout" role="main">
         <section class="results" aria-label="RP Hooks content">
             <div class="randomHookBox" id="randomHookBox" hidden>
@@ -98,7 +95,7 @@
             </div>
             <div class="hooksGrid">
                 <article class="hookCard" id="shopHooks">
-                    <h2>Shop Interaction Hooks</h2>
+                    <h2>Shop Interaction</h2>
                     <ul>
                         <li><strong>The Wrong Bag:</strong> You receive someone else’s order. It contains something
                             strange.</li>
@@ -158,85 +155,107 @@
                 </article>
 
             </div>
-     <!-- SHOP HOOKS -->
-                <article class="hookCard" id="shopHooks">
-                    <h2>Cactpot Scratch-off!1!11!!</h2>
-                    <img class="card__img" src="https://imgur.com/7s0YQjK.gif" alt="">
-                    <p>Test your luck! Roll /random</p>
-                       <strong>Below are our prizes</strong>
-                    <ol style="list-style:disc;">
-                        <li>0 - 100</li>
-                        <ol style="list-style:circle;">
-                            <li>You get Goobbue Strength Deodorant! Smell ya later!</li>
-                        </ol>
-                        <li>101 - 200</li>
-                        <ol style="list-style:circle;">
-                            <li>You get a pamphlet on how to not be socially awkward!</li>
-                        </ol>
-                        <li>201 - 300</li>
-                        <ol style="list-style:circle;">
-                            <li>You get a privacy brick! The privacy brick has two modes:
-                                <ol>
-                                    <li>Defensive mode: you will cover yourself with the brick.</li>
-                                    <li>Offensive mode: you will throw the brick at your intended.</li>
-                                </ol>
-                            </li>
-                        </ol>
-                        <li>301 - 350</li>
-                        <ol style="list-style:circle;">
-                            <li>You get a box of cigars! Please smoke them outside.</li>
-                        </ol>
-                        <li>351 - 400</li>
-                        <ol style="list-style:circle;">
-                            <li>You get and your intended get a free meal!</li>
-                        </ol>
-                        <li>401 - 450</li>
-                        <ol style="list-style:circle;">
-                            <li>You get wax noodles! Trick your intended into eating these life-like noodles.</li>
-                        </ol>
-                        <li>450 - 500</li>
-                        <ol style="list-style:circle;">
-                            <li>You get a free toaster!</li>
-                        </ol>
-                        <li>501 - 600</li>
-                        <ol style="list-style:circle;">
-                            <li>You and your intended get a pineapple-scented hat!</li>
-                        </ol>
-                        <li>601 - 650</li>
-                        <ol style="list-style:circle;">
-                            <li>You get two 1.7oz alcohol shots to share with your intended (or yourself)!</li>
-                        </ol>
-                        <li>651 - 700</li>
-                        <ol style="list-style:circle;">
-                            <li>You get a height-adjustable Lalafell booster seat!</li>
-                        </ol>
-                        <li>701 - 750</li>
-                        <ol style="list-style:circle;">
-                            <li>You get a body pillow of Y'shtola!</li>
-                        </ol>
-                        <li>751 - 800</li>
-                        <ol style="list-style:circle;">
-                            <li>You get an Ironworks weapon model kit!</li>
-                        </ol>
-                        <li>801 - 850</li>
-                        <ol style="list-style:circle;">
-                            <li>You and your intended get chicken tendies! Ang sarap, or yum!</li>
-                        </ol>
-                        <li>851 - 900</li>
-                        <ol style="list-style:circle;">
-                            <li>You get a body pillow of Aymeric!</li>
-                        </ol>
-                        <li>901 - 950</li>
-                        <ol style="list-style:circle;">
-                            <li>You get an all inclusive trip to Balmung's Quicksands!</li>
-                        </ol>
-                        <li>951 - 999</li>
-                        <ol style="list-style:circle;">
-                            <li>You get a gold brick! How does this place stay in business?</li>
-                        </ol>
-                    </ol>
-                    </ul>
-                </article>
+     <!-- CACTOPOT -->
+ <article class="hookCard hookCard--cactpot">
+  <h2>🎰 Cactpot Scratch-off!1!11!!</h2>
+
+  <img class="hookCard__gif"
+       src="https://imgur.com/7s0YQjK.gif"
+       alt="Cactpot scratch animation">
+
+  <p class="hookIntro">
+    Test your luck! Roll <strong>/random</strong> and see what chaos you unlock.
+  </p>
+
+  <div class="prizeBoard">
+    <div class="prizeTier">
+      <div class="prizeRange">0 – 100</div>
+      <div class="prizeReward">Goobbue Strength Deodorant! Smell ya later!</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">101 – 200</div>
+      <div class="prizeReward">A pamphlet on how to not be socially awkward!</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">201 – 300</div>
+      <div class="prizeReward">
+        Privacy Brick™
+        <ul>
+          <li><strong>Defensive Mode:</strong> Cover yourself with the brick.</li>
+          <li><strong>Offensive Mode:</strong> Throw the brick at your intended.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">301 – 350</div>
+      <div class="prizeReward">A box of cigars. Please smoke them outside.</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">351 – 400</div>
+      <div class="prizeReward">You and your intended get a free meal!</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">401 – 450</div>
+      <div class="prizeReward">Wax noodles. Trick your intended wisely.</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">450 – 500</div>
+      <div class="prizeReward">A free toaster!</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">501 – 600</div>
+      <div class="prizeReward">Matching pineapple-scented hats!</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">601 – 650</div>
+      <div class="prizeReward">Two 1.7oz alcohol shots to share (or not).</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">651 – 700</div>
+      <div class="prizeReward">Height-adjustable Lalafell booster seat!</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">701 – 750</div>
+      <div class="prizeReward">Body pillow of Y'shtola.</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">751 – 800</div>
+      <div class="prizeReward">Ironworks weapon model kit!</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">801 – 850</div>
+      <div class="prizeReward">Chicken tendies. Ang sarap.</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">851 – 900</div>
+      <div class="prizeReward">Body pillow of Aymeric.</div>
+    </div>
+
+    <div class="prizeTier">
+      <div class="prizeRange">901 – 950</div>
+      <div class="prizeReward">All-inclusive trip to Balmung's Quicksands.</div>
+    </div>
+
+    <div class="prizeTier prizeTier--legendary">
+      <div class="prizeRange">951 – 999</div>
+      <div class="prizeReward">A GOLD BRICK. How does this place stay in business?</div>
+    </div>
+  </div>
+</article>
+
             <!-- SAME FOOTER -->
             <footer class="footer">
                 <p>© Sari-Sari Store. Powered by vibes, duct tape, and sidequests.</p>
