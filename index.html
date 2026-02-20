@@ -431,6 +431,27 @@
   </div>
 </div>
 
+  <!-- Event Modal -->
+  <div class="eventModal" id="eventModal" aria-hidden="true">
+  <div class="eventModal__overlay" data-event-close></div>
+
+  <div class="eventModal__panel" role="dialog" aria-modal="true" aria-label="Not Suspicious Deal Event">
+    <div class="eventModal__header">
+      <h2 id="eventTitle">Event</h2>
+      <button class="eventModal__close" type="button" data-event-close aria-label="Close">✕</button>
+    </div>
+
+    <div class="eventModal__body">
+      <div class="eventModal__badge" id="eventBadge" aria-hidden="true">✨</div>
+      <p class="eventModal__text" id="eventText"></p>
+      <div class="eventModal__fineprint" id="eventFineprint"></div>
+    </div>
+
+    <div class="eventModal__actions" id="eventActions">
+      <!-- Buttons injected by JS -->
+    </div>
+  </div>
+</div>
 
 
 </body>
