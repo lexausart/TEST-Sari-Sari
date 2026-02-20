@@ -708,7 +708,7 @@
       weight: 18,
       badge: "🛡️",
       title: "Security Check (Very Legitimate)",
-      text: "Before viewing these deals, please confirm you are not: a rival shopkeeper, an undercover Flame officer, or emotionally fragile.",
+      text: "Before viewing these deals, please confirm you are not: a rival shopkeeper, an undercover Flames officer, or emotionally fragile.",
       fine: "Passing this check does not mean you are not suspicious.",
       buttons: [
         { label: "I Am Emotionally Stable", kind: "primary", action: "continue" },
@@ -981,7 +981,7 @@
   // Fake step templates; we’ll mark a random “current” index
   const stepTemplates = [
     { label: "Order received", sub: "Tang nodded approvingly." },
-    { label: "Packed", sub: "The twins offered “help.” Tang said no. The twins did it anyway." },
+    { label: "Packed", sub: "Brynley offered “help.” Tang said no. Brynley did it anyway." },
     { label: "Blessed (optional)", sub: "A minor blessing was applied. The package is now confident." },
     { label: "In transit", sub: "Traveling via very normal methods." },
     { label: "Out for delivery", sub: "Euclid is measuring the air resistance of your street." },
@@ -1016,9 +1016,9 @@
     {
       weight: 12,
       badge: "🧨",
-      title: "Twins Interference Detected",
-      status: "Your package has been seized by two small gremlins.",
-      detail: "Negotiations are ongoing. They have demanded: candy, stickers, and legal immunity.",
+      title: "Brynley Interference Detected",
+      status: "Your package has been seized by a small gremlin.",
+      detail: "Negotiations are ongoing. He has demanded: candy, stickers, and legal immunity.",
       fine: "ETA: depends on bribery",
       actions: [
         { label: "Bribe With Snacks", kind: "primary", action: "bribe" },
@@ -1158,7 +1158,7 @@
     let nowIdx = randInt(1, 4);
     if (scenario.title.includes("Delivered")) nowIdx = 5;
     if (scenario.title.includes("Legendary")) nowIdx = randInt(2, 4);
-    if (scenario.title.includes("Twins")) nowIdx = randInt(1, 3);
+    if (scenario.title.includes("Brynley")) nowIdx = randInt(1, 3);
     if (scenario.title.includes("Time Dilation")) nowIdx = randInt(0, 2);
 
     titleEl.textContent = scenario.title;
