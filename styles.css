@@ -595,6 +595,7 @@ a:hover {
   font-size: 28px;
   background: linear-gradient(180deg, #f3f4f6 0%, #fff 100%);
   flex: 0 0 auto;
+  width:200px
 }
 
 .staffCard__name {
@@ -1049,7 +1050,8 @@ a:hover {
 .hookCard__gif{
   width:250px;
   border-radius:var(--radius2);
-  margin:10px 0 12px;
+  margin:auto;
+  display:block
 }
 
 .hookIntro{
