@@ -673,3 +673,277 @@
 })();
 
 
+// SCRIPT.JS
+// Paste this block near the bottom of script.js (works alongside your existing drawer + shop JS)
+
+(() => {
+  const btn = document.getElementById("notSuspiciousBtn");
+  const modal = document.getElementById("eventModal");
+  if (!btn || !modal) return;
+
+  const titleEl = document.getElementById("eventTitle");
+  const badgeEl = document.getElementById("eventBadge");
+  const textEl = document.getElementById("eventText");
+  const fineEl = document.getElementById("eventFineprint");
+  const actionsEl = document.getElementById("eventActions");
+  const closeEls = modal.querySelectorAll("[data-event-close]");
+
+  // Where the button *would* normally go:
+  const DEALS_ANCHOR = "#shopHooks"; // change to your deals section id if you want
+  const goToDeals = () => { window.location.href = "index.html" + DEALS_ANCHOR; };
+
+  // Small helper: weighted random
+  const pickWeighted = (items) => {
+    const total = items.reduce((s, i) => s + i.weight, 0);
+    let r = Math.random() * total;
+    for (const it of items) {
+      r -= it.weight;
+      if (r <= 0) return it;
+    }
+    return items[items.length - 1];
+  };
+
+  const events = [
+    {
+      weight: 18,
+      badge: "🛡️",
+      title: "Security Check (Very Legitimate)",
+      text: "Before viewing these deals, please confirm you are not: a rival shopkeeper, an undercover Flame officer, or emotionally fragile.",
+      fine: "Passing this check does not mean you are not suspicious.",
+      buttons: [
+        { label: "✅ I Am Emotionally Stable", kind: "primary", action: "continue" },
+        { label: "🤨 That’s Between Me and the Moon", kind: "ghost", action: "continue" },
+      ],
+      onContinueToast: "Verification complete. You are suspicious.",
+    },
+    {
+      weight: 14,
+      badge: "🧾",
+      title: "Deal Disclaimer Scroll",
+      text: "These deals may include: mild chaos, aggressive discounts, and items labeled “Probably Fine.”",
+      fine: "By continuing you agree to the Terms of Vibes (Section 3: Emotional Damage).",
+      buttons: [
+        { label: "Accept Fate", kind: "primary", action: "continue" },
+        { label: "Read 72 More Terms", kind: "ghost", action: "moreTerms" },
+      ],
+    },
+    {
+      weight: 12,
+      badge: "🎰",
+      title: "Spin the Suspicion Wheel",
+      text: "You spin a wheel. It spins back.",
+      fine: "Wheel outcomes are legally considered “suggestions.”",
+      buttons: [
+        { label: "Spin", kind: "primary", action: "spin" },
+        { label: "I Fear Destiny", kind: "ghost", action: "close" },
+      ],
+    },
+    {
+      weight: 10,
+      badge: "🪄",
+      title: "Blessing Required",
+      text: "Tang insists on applying a minor blessing before you browse. This may improve your luck. Or complicate your life.",
+      fine: "Blessing strength varies with moon phase and flirtation levels.",
+      buttons: [
+        { label: "Accept Blessing", kind: "primary", action: "bless" },
+        { label: "I’ll Risk It", kind: "ghost", action: "continue" },
+      ],
+    },
+    {
+      weight: 8,
+      badge: "🧃",
+      title: "Tito Whiskey Interrupts",
+      text: "“Before you proceed, I have advice.”",
+      fine: "Advice is non-refundable and may be incorrect on purpose.",
+      buttons: [
+        { label: "What is it", kind: "primary", action: "advice" },
+        { label: "No thank you", kind: "ghost", action: "advice" },
+      ],
+    },
+    {
+      weight: 2,
+      badge: "✨",
+      title: "LEGENDARY DEAL EVENT",
+      text: "The twins have authorized a LIMITED TIME “ABSOLUTELY FINE” discount. Someone is going to regret this.",
+      fine: "Congrats. This event has a 2% spawn rate. Your fate is sealed.",
+      buttons: [
+        { label: "Open the Vault", kind: "primary", action: "continue" },
+        { label: "Close It. CLOSE IT.", kind: "ghost", action: "close" },
+      ],
+    },
+  ];
+
+  // Optional: use your existing toast if you already made one elsewhere.
+  const toast = (msg) => {
+    if (typeof window.toast === "function") return window.toast(msg);
+
+    // Minimal toast fallback
+    const el = document.createElement("div");
+    el.textContent = msg;
+    el.style.position = "fixed";
+    el.style.left = "50%";
+    el.style.bottom = "18px";
+    el.style.transform = "translate(-50%, 12px)";
+    el.style.opacity = "0";
+    el.style.pointerEvents = "none";
+    el.style.background = "rgba(17,24,39,.92)";
+    el.style.color = "#fff";
+    el.style.padding = "10px 12px";
+    el.style.borderRadius = "999px";
+    el.style.boxShadow = "0 10px 28px rgba(0,0,0,.22)";
+    el.style.font = "800 13px/1.1 system-ui";
+    el.style.zIndex = "9999";
+    el.style.maxWidth = "calc(100vw - 24px)";
+    el.style.whiteSpace = "nowrap";
+    el.style.overflow = "hidden";
+    el.style.textOverflow = "ellipsis";
+    el.style.transition = "opacity .18s ease, transform .18s ease";
+    document.body.appendChild(el);
+    requestAnimationFrame(() => { el.style.opacity = "1"; el.style.transform = "translate(-50%, 0)"; });
+    setTimeout(() => {
+      el.style.opacity = "0"; el.style.transform = "translate(-50%, 12px)";
+      setTimeout(() => el.remove(), 200);
+    }, 1200);
+  };
+
+  let currentEvent = null;
+  let lastFocus = null;
+
+  const open = () => {
+    lastFocus = document.activeElement;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("drawer-open"); // reuse scroll lock
+
+    // pick event
+    currentEvent = pickWeighted(events);
+    renderEvent(currentEvent);
+
+    const firstBtn = actionsEl.querySelector("button");
+    firstBtn && firstBtn.focus();
+  };
+
+  const close = () => {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("drawer-open");
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+  };
+
+  const renderEvent = (ev) => {
+    titleEl.textContent = ev.title;
+    badgeEl.textContent = ev.badge || "✨";
+    textEl.textContent = ev.text;
+    fineEl.textContent = ev.fine || "";
+
+    actionsEl.innerHTML = "";
+    ev.buttons.forEach((b) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = b.kind === "primary" ? "btn btn--primary" : "btn btn--ghost";
+      btn.textContent = b.label;
+      btn.addEventListener("click", () => handleAction(b.action, ev));
+      actionsEl.appendChild(btn);
+    });
+  };
+
+  const handleAction = (action, ev) => {
+    if (action === "close") return close();
+
+    if (action === "moreTerms") {
+      toast("You scroll. The terms scroll back. Respectfully.");
+      // tiny gag: append more fineprint
+      fineEl.textContent = (ev.fine || "") + " • Clause 72: snacks are final.";
+      return;
+    }
+
+    if (action === "spin") {
+      const outcomes = [
+        "You unlocked 5% off but owe Tang a story.",
+        "Free shipping. But Tito watches.",
+        "Blessing applied accidentally.",
+        "Euclid calibrated your discount (it’s unsettlingly precise).",
+        "You won a coupon that only works during a full moon.",
+      ];
+      const out = outcomes[Math.floor(Math.random() * outcomes.length)];
+      toast(out);
+      // After spinning once, change primary button to continue
+      actionsEl.innerHTML = "";
+      const cont = document.createElement("button");
+      cont.type = "button";
+      cont.className = "btn btn--primary";
+      cont.textContent = "Continue (nervously)";
+      cont.addEventListener("click", () => handleAction("continue", ev));
+      actionsEl.appendChild(cont);
+
+      const nope = document.createElement("button");
+      nope.type = "button";
+      nope.className = "btn btn--ghost";
+      nope.textContent = "I’ve seen enough";
+      nope.addEventListener("click", close);
+      actionsEl.appendChild(nope);
+      return;
+    }
+
+    if (action === "bless") {
+      const blessings = [
+        "Blessing applied: +2 luck, -1 common sense.",
+        "Blessing applied: your snacks arrive warm. Emotionally.",
+        "Blessing applied: your cart gains narrative tension.",
+      ];
+      toast(blessings[Math.floor(Math.random() * blessings.length)]);
+      return handleAction("continue", ev);
+    }
+
+    if (action === "advice") {
+      const adv = [
+        "Tito says: ‘Buy two. One for you, one for regret.’",
+        "Tito says: ‘If it’s labeled “Probably Fine,” it’s DEFINITELY fine.’",
+        "Tito says: ‘Never trust discounts that don’t glare back.’",
+      ];
+      toast(adv[Math.floor(Math.random() * adv.length)]);
+      return handleAction("continue", ev);
+    }
+
+    if (action === "continue") {
+      if (ev.onContinueToast) toast(ev.onContinueToast);
+      close();
+      // Go to deals (or replace with your real deals URL)
+      goToDeals();
+    }
+  };
+
+  // Button click opens modal instead of navigating immediately
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    open();
+  });
+
+  // Close clicks
+  closeEls.forEach((el) => el.addEventListener("click", close));
+
+  // ESC to close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+  });
+
+  // Basic focus trap
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("is-open")) return;
+    if (e.key !== "Tab") return;
+
+    const focusables = modal.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!focusables.length) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+})();
