@@ -663,7 +663,7 @@
           ensureToast("Checkout denied. Add snacks first.");
           return;
         }
-        ensureToast("Checkout initiated… (go back and add more snacks).");
+        ensureToast("(go back and add more snacks!!!11!)");
       });
     }
   }
