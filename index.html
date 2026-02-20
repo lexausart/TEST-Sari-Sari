@@ -80,7 +80,7 @@
       </p>
       <div class="hero__cta">
         <a class="btn btn--primary" id="notSuspiciousBtn" href="#">Shop “Not Suspicious” Deals</a>
-        <a class="btn btn--ghost" id="notSuspiciousBtn" href="#">Track an Order (why)</a>
+        <a class="btn btn--ghost" id="trackOrderBtn" href="#">Track an Order (why)</a>
       </div>
       <p class="hero__fineprint">*Primal shipping: arrives between “soon” and “after the next sidequest.”</p>
     </div>
@@ -453,7 +453,43 @@
   </div>
 </div>
 
+  
+<div class="trackModal" id="trackModal" aria-hidden="true">
+  <div class="trackModal__overlay" data-track-close></div>
 
+  <div class="trackModal__panel" role="dialog" aria-modal="true" aria-label="Track an order">
+    <div class="trackModal__header">
+      <h2 id="trackTitle">Order Tracking</h2>
+      <button class="trackModal__close" type="button" data-track-close aria-label="Close tracking">✕</button>
+    </div>
+
+    <div class="trackModal__body">
+      <div class="trackModal__top">
+        <div class="trackModal__badge" id="trackBadge" aria-hidden="true">📦</div>
+        <div class="trackModal__summary">
+          <div class="trackModal__status" id="trackStatus">Locating your package…</div>
+          <div class="trackModal__meta" id="trackMeta">Order ID: <strong id="trackOrderId">TZ-????</strong></div>
+        </div>
+      </div>
+
+      <div class="trackModal__progress" aria-label="Tracking progress">
+        <div class="trackSteps" id="trackSteps">
+          <!-- steps injected -->
+        </div>
+      </div>
+
+      <div class="trackModal__detail" id="trackDetail"></div>
+
+      <div class="trackModal__fineprint" id="trackFineprint"></div>
+    </div>
+
+    <div class="trackModal__actions" id="trackActions">
+      <!-- buttons injected -->
+    </div>
+  </div>
+</div>
+
+  
 </body>
 
 </html>
