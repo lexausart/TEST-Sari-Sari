@@ -1109,3 +1109,121 @@ a:hover {
 .prizeTier--legendary .prizeRange{
   color:#b8860b;
 }
+
+/* =========================
+   Random Event Modal
+========================= */
+.eventModal{
+  position:fixed;
+  inset:0;
+  display:none;
+  z-index:1100;
+}
+.eventModal.is-open{ display:block; }
+
+.eventModal__overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
+}
+
+.eventModal__panel{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.98);
+  width:min(520px, calc(100vw - 24px));
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.30);
+  overflow:hidden;
+  opacity:0;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.eventModal.is-open .eventModal__panel{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+.eventModal__header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  background:linear-gradient(180deg, rgba(245,158,11,.20) 0%, rgba(255,255,255,0) 100%);
+  border-bottom:1px solid var(--line);
+}
+.eventModal__header h2{
+  margin:0;
+  font-size:16px;
+  letter-spacing:-.2px;
+}
+
+.eventModal__close{
+  border:0;
+  background:rgba(17,24,39,.06);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-weight:900;
+}
+.eventModal__close:hover{ filter:brightness(1.02); }
+
+.eventModal__body{
+  padding:16px;
+}
+
+.eventModal__badge{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  background:rgba(245,158,11,.18);
+  border:1px solid rgba(245,158,11,.35);
+  margin-bottom:10px;
+}
+
+.eventModal__text{
+  margin:0 0 10px;
+  font-size:14px;
+  line-height:1.45;
+}
+
+.eventModal__fineprint{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.eventModal__actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:14px 16px 16px;
+  border-top:1px solid var(--line);
+  background:#fafafa;
+}
+
+.eventModal__actions .btn{
+  flex: 1 1 160px;
+}
+
+/* Mobile: slide-up sheet */
+@media (max-width:600px){
+  .eventModal__panel{
+    left:50%;
+    top:auto;
+    bottom:0;
+    transform:translate(-50%, 10px);
+    width:100%;
+    border-radius:20px 20px 0 0;
+  }
+  .eventModal.is-open .eventModal__panel{
+    transform:translate(-50%, 0);
+  }
+}
