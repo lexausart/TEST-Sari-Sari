@@ -711,8 +711,8 @@
       text: "Before viewing these deals, please confirm you are not: a rival shopkeeper, an undercover Flame officer, or emotionally fragile.",
       fine: "Passing this check does not mean you are not suspicious.",
       buttons: [
-        { label: "✅ I Am Emotionally Stable", kind: "primary", action: "continue" },
-        { label: "🤨 That’s Between Me and the Moon", kind: "ghost", action: "continue" },
+        { label: "I Am Emotionally Stable", kind: "primary", action: "continue" },
+        { label: "That’s Between Me and the Moon", kind: "ghost", action: "continue" },
       ],
       onContinueToast: "Verification complete. You are suspicious.",
     },
@@ -764,7 +764,7 @@
       weight: 2,
       badge: "✨",
       title: "LEGENDARY DEAL EVENT",
-      text: "The twins have authorized a LIMITED TIME “ABSOLUTELY FINE” discount. Someone is going to regret this.",
+      text: "Bryn has authorized a LIMITED TIME “ABSOLUTELY FINE” discount. Someone is going to regret this.",
       fine: "Congrats. This event has a 2% spawn rate. Your fate is sealed.",
       buttons: [
         { label: "Open the Vault", kind: "primary", action: "continue" },
@@ -947,3 +947,4 @@
     }
   });
 })();
+
