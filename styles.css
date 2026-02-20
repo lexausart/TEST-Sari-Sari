@@ -1047,7 +1047,7 @@ a:hover {
 }
 
 .hookCard__gif{
-  width:100%;
+  width:25%;
   border-radius:var(--radius2);
   margin:10px 0 12px;
 }
