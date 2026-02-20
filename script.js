@@ -360,7 +360,7 @@
         "Tang insists you pay with a story instead of gil.",
         "A trinket glows when you walk past the counter.",
         "Euclid needs help testing something that absolutely will not explode.",
-        "One of the twins claims you promised them candy.",
+        "Brynley claims you promised him candy.",
         "Sunny hands you a drink and says, 'This one chooses people.'",
         "Tito Whiskey is already mid-sentence when you walk in.",
         "A note pinned to the wall has your name on it.",
@@ -369,8 +369,9 @@
         "A delivery crate arrives addressed to you.",
         "Tang greets you like she’s been expecting you.",
         "Someone storms out of the shop just as you arrive.",
-        "The twins are running a 'totally legal' side business.",
-        "A shelf collapses at the exact moment you look at it."
+        "Brynley is running a 'totally legal' side business.",
+        "A shelf collapses at the exact moment you look at it.",
+        "R'tehz is still judging you."
     ];
 
     btn.addEventListener("click", () => {
