@@ -948,3 +948,339 @@
   });
 })();
 
+
+
+
+
+// It is self-contained and won’t affect other pages if the button/modal aren’t present.
+
+(() => {
+  const btn = document.getElementById("trackOrderBtn");
+  const modal = document.getElementById("trackModal");
+  if (!btn || !modal) return;
+
+  const titleEl = document.getElementById("trackTitle");
+  const badgeEl = document.getElementById("trackBadge");
+  const statusEl = document.getElementById("trackStatus");
+  const metaEl = document.getElementById("trackMeta");
+  const orderIdEl = document.getElementById("trackOrderId");
+  const stepsEl = document.getElementById("trackSteps");
+  const detailEl = document.getElementById("trackDetail");
+  const fineEl = document.getElementById("trackFineprint");
+  const actionsEl = document.getElementById("trackActions");
+  const closeEls = modal.querySelectorAll("[data-track-close]");
+
+  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+  const makeOrderId = () => {
+    const a = randInt(1000, 9999);
+    const b = randInt(10, 99);
+    return `TZ-${a}-${b}`;
+  };
+
+  // Fake step templates; we’ll mark a random “current” index
+  const stepTemplates = [
+    { label: "Order received", sub: "Tang nodded approvingly." },
+    { label: "Packed", sub: "The twins offered “help.” Tang said no. The twins did it anyway." },
+    { label: "Blessed (optional)", sub: "A minor blessing was applied. The package is now confident." },
+    { label: "In transit", sub: "Traveling via very normal methods." },
+    { label: "Out for delivery", sub: "Euclid is measuring the air resistance of your street." },
+    { label: "Delivered", sub: "Possibly. Allegedly. Spiritually." }
+  ];
+
+  const scenarios = [
+    {
+      weight: 18,
+      badge: "📦",
+      title: "Standard Tracking (Allegedly)",
+      status: "Your package is moving at a reasonable pace.",
+      detail: "Route is stable. Vibes are acceptable. No one has challenged your box to a duel (yet).",
+      fine: "ETA: soon™",
+      actions: [
+        { label: "Refresh Tracking", kind: "primary", action: "refresh" },
+        { label: "Close", kind: "ghost", action: "close" },
+      ],
+    },
+    {
+      weight: 14,
+      badge: "🧠",
+      title: "Euclid Mode: Over-Optimized",
+      status: "Euclid is personally optimizing delivery.",
+      detail: "Current state: recalculating the optimal route for the 11th time. Your order is safe, but the math is intense.",
+      fine: "ETA: after Euclid stops optimizing (unknown)",
+      actions: [
+        { label: "Tell Him To Stop", kind: "primary", action: "euclidStop" },
+        { label: "Let Him Cook", kind: "ghost", action: "refresh" },
+      ],
+    },
+    {
+      weight: 12,
+      badge: "🧨",
+      title: "Twins Interference Detected",
+      status: "Your package has been seized by two small gremlins.",
+      detail: "Negotiations are ongoing. They have demanded: candy, stickers, and legal immunity.",
+      fine: "ETA: depends on bribery",
+      actions: [
+        { label: "Bribe With Snacks", kind: "primary", action: "bribe" },
+        { label: "Attempt Negotiation", kind: "ghost", action: "refresh" },
+      ],
+    },
+    {
+      weight: 10,
+      badge: "🧃",
+      title: "Tito Whiskey Update",
+      status: "Your package stopped for advice.",
+      detail: "Tito Whiskey is speaking. The package is listening. This is not ideal.",
+      fine: "ETA: when Tito finishes his story (never)",
+      actions: [
+        { label: "Interrupt Tito", kind: "primary", action: "interrupt" },
+        { label: "Accept Your Fate", kind: "ghost", action: "refresh" },
+      ],
+    },
+    {
+      weight: 10,
+      badge: "🌧️",
+      title: "Weather Delay",
+      status: "Your package encountered rain.",
+      detail: "Not regular rain. Emotional rain. The box is currently under a leaf, reflecting.",
+      fine: "ETA: when the sky stops having feelings",
+      actions: [
+        { label: "Send Encouragement", kind: "primary", action: "encourage" },
+        { label: "Refresh", kind: "ghost", action: "refresh" },
+      ],
+    },
+    {
+      weight: 8,
+      badge: "🧿",
+      title: "Suspicion Meter Rising",
+      status: "Your package is suspicious but stable.",
+      detail: `Suspicion Level: ${randInt(45, 88)}%. Do not stare at the box too long.`,
+      fine: "ETA: the box will arrive when it decides you’re ready.",
+      actions: [
+        { label: "Assert Innocence", kind: "primary", action: "innocence" },
+        { label: "Offer Snacks To Customs", kind: "ghost", action: "refresh" },
+      ],
+    },
+    {
+      weight: 6,
+      badge: "🕰️",
+      title: "Time Dilation Event",
+      status: "Aether interference detected.",
+      detail: "Your package experienced time dilation and is now technically arriving yesterday.",
+      fine: "ETA: yes.",
+      actions: [
+        { label: "Complain Politely", kind: "primary", action: "complain" },
+        { label: "Refresh Reality", kind: "ghost", action: "refresh" },
+      ],
+    },
+    {
+      weight: 2,
+      badge: "✨",
+      title: "Legendary Tracking Event",
+      status: "Your order has achieved narrative importance.",
+      detail: "A cutscene begins. Your package is glowing. NPCs are taking it seriously.",
+      fine: "ETA: after you acknowledge the plot.",
+      actions: [
+        { label: "Skip Cutscene (impossible)", kind: "primary", action: "refresh" },
+        { label: "Accept Destiny", kind: "ghost", action: "close" },
+      ],
+    },
+  ];
+
+  const pickWeighted = (items) => {
+    const total = items.reduce((s, i) => s + i.weight, 0);
+    let r = Math.random() * total;
+    for (const it of items) {
+      r -= it.weight;
+      if (r <= 0) return it;
+    }
+    return items[items.length - 1];
+  };
+
+  // Minimal toast (uses your global toast if present)
+  const toast = (msg) => {
+    if (typeof window.toast === "function") return window.toast(msg);
+    const el = document.createElement("div");
+    el.textContent = msg;
+    el.style.position = "fixed";
+    el.style.left = "50%";
+    el.style.bottom = "18px";
+    el.style.transform = "translate(-50%, 12px)";
+    el.style.opacity = "0";
+    el.style.pointerEvents = "none";
+    el.style.background = "rgba(17,24,39,.92)";
+    el.style.color = "#fff";
+    el.style.padding = "10px 12px";
+    el.style.borderRadius = "999px";
+    el.style.boxShadow = "0 10px 28px rgba(0,0,0,.22)";
+    el.style.font = "800 13px/1.1 system-ui";
+    el.style.zIndex = "9999";
+    el.style.maxWidth = "calc(100vw - 24px)";
+    el.style.whiteSpace = "nowrap";
+    el.style.overflow = "hidden";
+    el.style.textOverflow = "ellipsis";
+    el.style.transition = "opacity .18s ease, transform .18s ease";
+    document.body.appendChild(el);
+    requestAnimationFrame(() => { el.style.opacity = "1"; el.style.transform = "translate(-50%, 0)"; });
+    setTimeout(() => {
+      el.style.opacity = "0";
+      el.style.transform = "translate(-50%, 12px)";
+      setTimeout(() => el.remove(), 200);
+    }, 1200);
+  };
+
+  let lastFocus = null;
+  let current = null;
+  let orderId = makeOrderId();
+
+  const buildSteps = (nowIdx) => {
+    stepsEl.innerHTML = "";
+    stepTemplates.forEach((s, i) => {
+      const el = document.createElement("div");
+      el.className = "trackStep";
+      if (i < nowIdx) el.classList.add("is-done");
+      if (i === nowIdx) el.classList.add("is-now");
+      el.innerHTML = `
+        <div class="trackStep__dot" aria-hidden="true"></div>
+        <div>
+          <p class="trackStep__label">${s.label}</p>
+          <p class="trackStep__sub">${s.sub}</p>
+        </div>
+      `;
+      stepsEl.appendChild(el);
+    });
+  };
+
+  const render = (scenario) => {
+    current = scenario;
+
+    // Vary "current step" per scenario, with some drama
+    let nowIdx = randInt(1, 4);
+    if (scenario.title.includes("Delivered")) nowIdx = 5;
+    if (scenario.title.includes("Legendary")) nowIdx = randInt(2, 4);
+    if (scenario.title.includes("Twins")) nowIdx = randInt(1, 3);
+    if (scenario.title.includes("Time Dilation")) nowIdx = randInt(0, 2);
+
+    titleEl.textContent = scenario.title;
+    badgeEl.textContent = scenario.badge;
+    statusEl.textContent = scenario.status;
+    orderIdEl.textContent = orderId;
+    metaEl.innerHTML = `Order ID: <strong>${orderId}</strong>`;
+
+    buildSteps(nowIdx);
+
+    detailEl.textContent = scenario.detail;
+    fineEl.textContent = scenario.fine || "";
+
+    actionsEl.innerHTML = "";
+    scenario.actions.forEach((a) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = a.kind === "primary" ? "btn btn--primary" : "btn btn--ghost";
+      b.textContent = a.label;
+      b.addEventListener("click", () => handleAction(a.action));
+      actionsEl.appendChild(b);
+    });
+  };
+
+  const open = () => {
+    lastFocus = document.activeElement;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("drawer-open"); // scroll lock (reused)
+
+    // Keep same orderId for the session until you close modal; feels consistent
+    render(pickWeighted(scenarios));
+
+    const firstBtn = actionsEl.querySelector("button");
+    firstBtn && firstBtn.focus();
+  };
+
+  const close = () => {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("drawer-open");
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+  };
+
+  const handleAction = (action) => {
+    if (action === "close") return close();
+
+    if (action === "refresh") {
+      toast("Refreshing tracking… (respectfully).");
+      render(pickWeighted(scenarios));
+      return;
+    }
+
+    if (action === "euclidStop") {
+      toast("Euclid acknowledged your request and began optimizing how to stop optimizing.");
+      render(pickWeighted(scenarios));
+      return;
+    }
+
+    if (action === "bribe") {
+      toast("Bribe accepted. A sticker has been added to your box.");
+      render(pickWeighted(scenarios));
+      return;
+    }
+
+    if (action === "interrupt") {
+      toast("You interrupted Tito. He is now louder.");
+      render(pickWeighted(scenarios));
+      return;
+    }
+
+    if (action === "encourage") {
+      toast("You encouraged the package. It feels seen.");
+      render(pickWeighted(scenarios));
+      return;
+    }
+
+    if (action === "innocence") {
+      toast("Innocence asserted. Suspicion reduced by 1% (symbolically).");
+      render(pickWeighted(scenarios));
+      return;
+    }
+
+    if (action === "complain") {
+      toast("Complaint logged. The universe shrugged.");
+      render(pickWeighted(scenarios));
+      return;
+    }
+  };
+
+  // Intercept click to open modal
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    orderId = makeOrderId(); // new session each open
+    open();
+  });
+
+  // Close on overlay/close button
+  closeEls.forEach((el) => el.addEventListener("click", close));
+
+  // ESC to close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+  });
+
+  // Focus trap
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("is-open")) return;
+    if (e.key !== "Tab") return;
+
+    const focusables = modal.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!focusables.length) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+})();
